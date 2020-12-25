@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Spring Sand</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	</head>
+	<body>
+		<section class="container">
+			<section>
+				<h2>Details of the river</h2>
+			</section>
+			<section style="text-align:right">
+				<a href="#" th:href="@{/rivers}">Back to the list</a>
+			</section>
+			<section>
+				<div class="rows" th:object="${river}">
+					<div class="row-sbs">
+						<div class="col head-col">Name</div>
+						<div class="col" th:text="*{name}">river</div>
+					</div>
+					<div class="row-sbs">
+						<div class="col head-col">Source</div>
+						<div class="col" th:text="*{source}">from</div>
+					</div>
+					<div class="row-sbs">
+						<div class="col head-col">Mouse</div>
+						<div class="col" th:text="*{mouse}">to</div>
+					</div>
+				</div>
+			</section>
+			<section>
+				<a class="ope" href="#" th:href="@{/rivers/{id}/edit(id=*{id})}">Edit</a>
+				<form class="ope-form" th:action="@{/rivers/{id}/delete(id=*{id})}" th:method="post">
+					<a class="ope" href="javascript:void(0);" onclick="jsDeleteRiver(this)">Del</a>
+				</form>
+			</section>
+		</section>
+		<script type="text/javascript" th:src="@{/js/script.js}"></script>
+	</body>
+</html>

@@ -1,3 +1,15 @@
+*,
+*::before,
+*::after {
+	margin:0;
+	padding:0;
+	box-sizing:border-box
+}
+
+h1,h2,h3,section {
+	margin-bottom: 8px;
+}
+
 .container {
 	margin: 0 auto;
 	max-width: 800px;
@@ -11,15 +23,11 @@
 	grid-template-columns: 2fr 2fr 2fr 1fr;
 	line-height: 1.6;
 }
-.row-sbs {
-	/* 2-column(side by side) row */
-	display: grid;
-	grid-template-columns: 1fr 2fr;
-}
 .head-row {
 	border-bottom: 1px solid #000000;
 }
-.head-row > .col {
+.head-row > .col,
+.head-col {
 	text-transform: capitalize;
 	font-weight: bold;
 }
@@ -35,4 +43,10 @@
 }
 .ope-form {
 	display: inline-block;
+}
+
+.row-sbs {
+	/* 2-column(side by side) row */
+	display: grid;
+	grid-template-columns: 8em auto;
 }

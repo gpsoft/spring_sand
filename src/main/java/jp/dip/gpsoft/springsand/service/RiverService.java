@@ -16,6 +16,10 @@ public class RiverService {
 	@Autowired
 	private RiverRepository riverRepository;
 
+	public River lookupRiver(Integer id) {
+		return riverRepository.getOne(id);
+	}
+
 	public List<River> findAllRivers() {
 		return riverRepository.findAll();
 	}

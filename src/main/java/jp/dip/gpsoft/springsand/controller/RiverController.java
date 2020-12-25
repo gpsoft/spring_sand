@@ -23,6 +23,12 @@ public class RiverController {
 		return "river/index";
 	}
 
+	@GetMapping("/{id:^[\\d]+$}")
+	public String show(@PathVariable("id") Integer id, Model model) {
+		model.addAttribute("river",  riverService.lookupRiver(id));
+		return "river/show";
+	}
+
 	@PostMapping("/{id:^[\\d]+$}/delete")
 	public String destroy(@PathVariable("id") Integer id) {
 		riverService.deleteRiver(id);
