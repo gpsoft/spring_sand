@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Error</title>
+	</head>
+	<body>
+		<h2>Error</h2>
+		<p><span th:text="${status}">Code</span>: <span th:text="${error}"></span></p>
+		<a href="#" th:href="@{/}">Back to the top</a>
+	</body>
+</html>
