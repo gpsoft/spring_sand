@@ -29,7 +29,7 @@ public class RiverController {
 	@GetMapping("/{id:^[\\d]+$}")
 	public String show(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("river", riverService.lookupRiver(id));
-		return "river/show";
+		return "river/details";
 	}
 
 	@GetMapping("/new")
