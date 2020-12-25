@@ -1,7 +1,20 @@
-.row {
+.container {
+	margin: 0 auto;
+	max-width: 800px;
+	background-color: #f5f5f5;
+	padding: 8px 16px;
+}
+
+.row-4 {
+	/* 4-column row */
 	display: grid;
 	grid-template-columns: 2fr 2fr 2fr 1fr;
 	line-height: 1.6;
+}
+.row-sbs {
+	/* 2-column(side by side) row */
+	display: grid;
+	grid-template-columns: 1fr 2fr;
 }
 .head-row {
 	border-bottom: 1px solid #000000;
