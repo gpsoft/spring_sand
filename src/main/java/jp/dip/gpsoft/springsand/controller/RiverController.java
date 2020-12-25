@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.dip.gpsoft.springsand.exception.BadRequestStatusException;
 import jp.dip.gpsoft.springsand.model.River;
 import jp.dip.gpsoft.springsand.service.RiverService;
 
@@ -37,8 +38,23 @@ public class RiverController {
 		return "river/form";
 	}
 
+	@GetMapping("/{id:^[\\d]+$}/edit")
+	public String editRiver(@PathVariable("id") Integer id, Model model) {
+		model.addAttribute("river", riverService.lookupRiver(id));
+		return "river/form";
+	}
+
 	@PostMapping("")
 	public String create(@ModelAttribute River river) {
+		riverService.saveRiver(river);
+		return "redirect:/rivers";
+	}
+
+	@PostMapping("/{id:^[\\d]+$}")
+	public String update(@PathVariable("id") Integer id, @ModelAttribute River river) {
+		if (!id.equals(river.getId())) {
+			throw new BadRequestStatusException();
+		}
 		riverService.saveRiver(river);
 		return "redirect:/rivers";
 	}

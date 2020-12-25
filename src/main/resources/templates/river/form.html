@@ -19,27 +19,28 @@
 				<a href="#" th:href="@{/rivers}">Back to the list</a>
 			</section>
 			<section>
-				<form th:action="@{/rivers}" th:method="post">
+				<form th:action="${river.isNew} ? @{/rivers} : @{/rivers/{id}(id=*{id})}" th:method="post">
+					<input th:unless="${river.isNew}" type="hidden" name="id" th:value="*{id}" />
 					<div class="rows">
 						<div class="row-sbs">
 							<div class="col head-col">Name</div>
 							<div class="col">
 								<input type="text" name="name" th:value="*{name}"
-									placeholder="川の名前" required />
+												   placeholder="川の名前" required />
 							</div>
 						</div>
 						<div class="row-sbs">
 							<div class="col head-col">Source</div>
 							<div class="col">
 								<input type="text" name="source" th:value="*{source}"
-									placeholder="源流" required />
+												   placeholder="源流" required />
 							</div>
 						</div>
 						<div class="row-sbs">
 							<div class="col head-col">Mouse</div>
 							<div class="col">
 								<input type="text" name="mouse" th:value="*{mouse}"
-									placeholder="河口" required />
+												   placeholder="河口" required />
 							</div>
 						</div>
 					</div>
