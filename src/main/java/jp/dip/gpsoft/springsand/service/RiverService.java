@@ -25,6 +25,11 @@ public class RiverService {
 	}
 
 	@Transactional(readOnly = false)
+	public void saveRiver(River river) {
+		riverRepository.save(river);
+	}
+
+	@Transactional(readOnly = false)
 	public void deleteRiver(Integer id) {
 		riverRepository.deleteById(id);
 	}

@@ -25,6 +25,10 @@ public class River {
 		this.mouse = mouse;
 	}
 
+	public boolean isNew() {
+		return id == null;
+	}
+
 	@Override
 	public String toString() {
 		return "River#" + id + "[name=" + name + ", from " + source + " to " + mouse
