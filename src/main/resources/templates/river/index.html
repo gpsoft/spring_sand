@@ -14,7 +14,10 @@
 			<section>
 				<h2>List of rivers</h2>
 			</section>
-			<section>
+			<section th:if="${rivers.size} <= 0">
+				<p>Sorry, we have no rivers for now.</p>
+			</section>
+			<section th:if="${rivers.size} > 0">
 				<div class="rows">
 					<div class="row-4 head-row">
 						<div class="col">name</div>
@@ -38,7 +41,7 @@
 				</div>
 			</section>
 			<section>
-				<a class="ope" href="#" th:href="@{/rivers/new}">New River</a>
+				<a class="ope" href="#" th:href="@{/rivers/new}">Add New River</a>
 			</section>
 		</section>
 		<script type="text/javascript" th:src="@{/js/script.js}"></script>

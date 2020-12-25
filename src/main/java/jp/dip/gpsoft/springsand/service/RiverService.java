@@ -1,12 +1,14 @@
 package jp.dip.gpsoft.springsand.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import jp.dip.gpsoft.springsand.exception.NotFoundStatusException;
 import jp.dip.gpsoft.springsand.model.River;
 import jp.dip.gpsoft.springsand.repository.RiverRepository;
 
@@ -17,7 +19,8 @@ public class RiverService {
 	private RiverRepository riverRepository;
 
 	public River lookupRiver(Integer id) {
-		return riverRepository.getOne(id);
+		Optional<River> maybeRiver = riverRepository.findById(id);
+		return maybeRiver.orElseThrow(NotFoundStatusException::new);
 	}
 
 	public List<River> findAllRivers() {
