@@ -19,4 +19,9 @@ public class RiverService {
 	public List<River> findAllRivers() {
 		return riverRepository.findAll();
 	}
+
+	@Transactional(readOnly = false)
+	public void deleteRiver(Integer id) {
+		riverRepository.deleteById(id);
+	}
 }
