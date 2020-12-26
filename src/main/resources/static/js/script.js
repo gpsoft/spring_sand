@@ -1,4 +1,4 @@
-function jsDeleteRiver(anchor) {
-	if ( !confirm('削除するよ?') ) return;
+function jsConfirmAndSubmit(anchor, action) {
+	if ( !confirm(action+'するよ?') ) return;
 	anchor.closest('form').submit();
 }

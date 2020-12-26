@@ -36,7 +36,7 @@
 			<section>
 				<a class="ope" href="#" th:href="@{/rivers/{id}/edit(id=*{id})}">Edit</a>
 				<form class="ope-form" th:action="@{/rivers/{id}/delete(id=*{id})}" th:method="post">
-					<a class="ope" href="javascript:void(0);" onclick="jsDeleteRiver(this)">Del</a>
+					<a class="ope" href="javascript:void(0);" onclick="jsConfirmAndSubmit(this, '削除')">Del</a>
 				</form>
 			</section>
 		</section>
