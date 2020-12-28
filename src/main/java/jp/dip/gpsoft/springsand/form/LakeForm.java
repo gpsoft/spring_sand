@@ -6,11 +6,14 @@ import org.hibernate.validator.constraints.Length;
 
 import jp.dip.gpsoft.springsand.model.Lake;
 import jp.dip.gpsoft.springsand.service.LakeService;
-import jp.dip.gpsoft.springsand.validation.NotBlankUnlessPref;
+import jp.dip.gpsoft.springsand.validation.LocationRequiredUnlessPref;
 import jp.dip.gpsoft.springsand.validation.NumberString;
 
-@NotBlankUnlessPref(message = "場所を入力してください。")
+@LocationRequiredUnlessPref(message = "場所を入力してください。")
 public class LakeForm {
+	final private static String LOCRADIO_BY_TEXT = "0";
+	final private static String LOCRADIO_BY_SELECT = "1";
+
 	private Integer id;
 
 	@NotBlank(message = "湖の名前を入力してください。")
@@ -30,7 +33,7 @@ public class LakeForm {
 	public LakeForm() {
 		id = null;
 		name = "";
-		bySelect = "0";
+		bySelect = LOCRADIO_BY_TEXT;
 		prefecture = "";
 		location = "";
 		area = "";
@@ -40,7 +43,7 @@ public class LakeForm {
 		id = lake.getId();
 		name = lake.getName();
 		location = lake.getLocation();
-		bySelect = LakeService.isPref(location) ? "1" : "0";
+		bySelect = LakeService.isPref(location) ? LOCRADIO_BY_SELECT : LOCRADIO_BY_TEXT;
 		area = lake.getArea().toString();
 	}
 
@@ -49,7 +52,15 @@ public class LakeForm {
 	}
 
 	public boolean isPref() {
-		return bySelect.equals("1");
+		return bySelect.equals(LOCRADIO_BY_SELECT);
+	}
+
+	public String locationByText() {
+		return LOCRADIO_BY_TEXT;
+	}
+
+	public String locationBySelect() {
+		return LOCRADIO_BY_SELECT;
 	}
 
 	public String[] allPrefs() {

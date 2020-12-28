@@ -9,13 +9,13 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = { NotBlankUnlessPrefValidator.class })
+@Constraint(validatedBy = { LocationRequiredUnlessPrefValidator.class })
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface NotBlankUnlessPref {
+public @interface LocationRequiredUnlessPref {
 
-	String message() default "{jp.dip.gpsoft.springsand.validation.NotBlankUnlessPref.message}";
+	String message() default "{jp.dip.gpsoft.springsand.validation.LocationRequiredUnlessPref.message}";
 
 	Class<?>[] groups() default {};
 
@@ -25,6 +25,6 @@ public @interface NotBlankUnlessPref {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Documented
 	public @interface List {
-		NotBlankUnlessPref[] value();
+		LocationRequiredUnlessPref[] value();
 	}
 }

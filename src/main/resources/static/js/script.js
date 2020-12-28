@@ -4,9 +4,14 @@ function jsConfirmAndSubmit(anchor, action) {
 }
 
 function jsChangeLocationInput(radio) {
-	let byPref = radio.value == 1;
-	document.querySelector('#jsLocationByText').hidden = byPref;
-	document.querySelector('#jsLocationBySelect').hidden = !byPref;
+	let isPref = radio.hasAttribute('data-pref-flg');
+	jsToggleInput(document.querySelector('#jsLocationByText'), !isPref);
+	jsToggleInput(document.querySelector('#jsLocationBySelect'), isPref);
+}
+
+function jsToggleInput(inp, on) {
+	inp.hidden = !on;
+	inp.disabled = !on;
 }
 
 (()=>{

@@ -5,13 +5,13 @@ import javax.validation.ConstraintValidatorContext;
 
 import jp.dip.gpsoft.springsand.form.LakeForm;
 
-public class NotBlankUnlessPrefValidator
-		implements ConstraintValidator<NotBlankUnlessPref, LakeForm> {
+public class LocationRequiredUnlessPrefValidator
+		implements ConstraintValidator<LocationRequiredUnlessPref, LakeForm> {
 
-	private NotBlankUnlessPref annotation;
+	private LocationRequiredUnlessPref annotation;
 
 	@Override
-	public void initialize(NotBlankUnlessPref annotation) {
+	public void initialize(LocationRequiredUnlessPref annotation) {
 		this.annotation = annotation;
 	}
 
