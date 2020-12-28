@@ -47,7 +47,7 @@
 													placeholder="場所" />
 									<select id="jsLocationBySelect" name="prefecture">
 										<option th:each="pref : *{allPrefs}" th:value="${pref}"
-											th:selected="!${lakeForm.isPref()} and *{location} == ${pref}"
+											th:selected="${lakeForm.isPref()} and *{location} == ${pref}"
 											th:text="${pref}">北海道</option>
 									</select>
 									<p class="error-msg" th:if="${#fields.hasErrors('location')}" th:errors="*{location}">no!</p>
