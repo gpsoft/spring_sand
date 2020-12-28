@@ -10,41 +10,61 @@
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 	</head>
 	<body>
-		<section class="container" th:object="${lake}">
+		<section class="container" th:object="${lakeForm}">
 			<section>
-				<h2 th:if="${lake.isNew}">Create a lake</h2>
-				<h2 th:unless="${lake.isNew}">Edit the lake</h2>
+				<h2 th:if="*{isNew}">Create a lake</h2>
+				<h2 th:unless="*{isNew}">Edit the lake</h2>
 			</section>
 			<section style="text-align:right">
 				<a href="#" th:href="@{/lakes}">Back to the list</a>
 			</section>
 			<section>
-				<form th:action="${lake.isNew} ? @{/lakes} : @{/lakes/{id}(id=*{id})}" th:method="post">
-					<input th:unless="${lake.isNew}" type="hidden" name="id" th:value="*{id}" />
+				<form th:action="*{isNew} ? @{/lakes} : @{/lakes/{id}(id=*{id})}" th:method="post">
+					<input th:unless="*{isNew}" type="hidden" name="id" th:value="*{id}" />
 					<div class="rows">
 						<div class="row-sbs">
 							<div class="col head-col">name</div>
 							<div class="col">
 								<input type="text" name="name" th:value="*{name}"
-												   placeholder="川の名前" required />
+												th:class="${#fields.hasErrors('name')} ? 'with-error' : ''"
+												placeholder="湖の名前" />
+								<p class="error-msg" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">no!</p>
 							</div>
 						</div>
 						<div class="row-sbs">
 							<div class="col head-col">location</div>
 							<div class="col">
-								<input type="text" name="location" th:value="*{location}"
-												   placeholder="場所" required />
+								<label><input type="radio" name="bySelect" value="0"
+									onchange="jsChangeLocationInput(this)"
+									th:field="*{bySelect}" />場所を指定</label>
+								<label><input type="radio" name="bySelect" value="1"
+									onchange="jsChangeLocationInput(this)"
+									th:field="*{bySelect}" />都道府県から選択</label>
+								<div>
+									<input id="jsLocationByText" type="text" name="location"
+													th:value="${lakeForm.isPref()} ? '' : *{location}"
+													th:class="${#fields.hasErrors('location')} ? 'with-error' : ''"
+													placeholder="場所" />
+									<select id="jsLocationBySelect" name="prefecture">
+										<option th:each="pref : *{allPrefs}" th:value="${pref}"
+											th:selected="!${lakeForm.isPref()} and *{location} == ${pref}"
+											th:text="${pref}">北海道</option>
+									</select>
+									<p class="error-msg" th:if="${#fields.hasErrors('location')}" th:errors="*{location}">no!</p>
+								</div>
 							</div>
 						</div>
 						<div class="row-sbs">
 							<div class="col head-col">area</div>
 							<div class="col">
 								<input type="text" name="area" th:value="*{area}"
-												   placeholder="面積" required /> km2
+												th:class="${#fields.hasErrors('area')} ? 'with-error' : ''"
+												placeholder="面積" /> km2
+								<p class="error-msg" th:if="${#fields.hasErrors('area')}" th:errors="*{area}">no!</p>
 							</div>
 						</div>
 					</div>
-					<div class="rows" th:object="${lake}">
+					<div class="rows">
 						<div class="row-sbs">
 							<div class="col head-col"></div>
 							<div class="col">
