@@ -49,13 +49,13 @@ public class SpringSandApplication {
 			lakeRepository.save(shinji);
 			Lake hamana = new Lake("浜名湖", "静岡県", 65);
 			lakeRepository.save(hamana);
-			Valley valley = new Valley("耶馬渓");
-			valleyRepository.save(valley);
-			valleyRepository.save(new Valley("帝釈峡"));
-			valleyRepository.save(new Valley("仙酔峡"));
 			IntStream.rangeClosed(1,100).forEach(n->{
 				valleyRepository.save(new Valley("谷"+String.format("%02d", n)));
 			});
+			valleyRepository.save(new Valley("耶馬渓"));
+			valleyRepository.save(new Valley("帝釈峡"));
+			valleyRepository.save(new Valley("仙酔峡"));
+			valleyRepository.save(new Valley("Yosemite & Kalalau"));
 		};
 	}
 }

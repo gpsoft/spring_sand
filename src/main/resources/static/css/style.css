@@ -77,3 +77,24 @@ input.with-error {
 	font-size: 0.8em;
 	color: #ff0000;
 }
+
+.pager {
+	margin: 8px 4px;
+}
+.pager a {
+	display: inline-block;
+	padding: 0 4px;
+	border: 1px solid #333333;
+	text-decoration: none;
+}
+.pager a + a {
+	margin-left: 8px;
+}
+
+ul.sorter {
+	margin: 8px 4px;
+}
+ul.sorter li {
+	margin-left: 2em;
+	list-style: none;
+}

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,8 +30,18 @@ public class ValleyService {
 		return valleyRepository.findAll();
 	}
 
+	public Page<Valley> findAllValleys(Pageable pageable) {
+		return valleyRepository.findAll(pageable);
+	}
+
 	public List<Valley> findValleys(String name) {
 		return valleyRepository.findByNameLike(name);
+	}
+
+	public Page<Valley> findValleys(String name, Pageable pageable) {
+		List<Valley> list = valleyRepository.findByNameLike(name, pageable);
+		long count = valleyRepository.countByNameLike(name);
+		return new PageImpl<Valley>(list, pageable, count);
 	}
 
 	@Transactional(readOnly = false)

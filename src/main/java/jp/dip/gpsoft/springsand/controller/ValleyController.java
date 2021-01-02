@@ -3,6 +3,8 @@ package jp.dip.gpsoft.springsand.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jp.dip.gpsoft.springsand.Utils;
 import jp.dip.gpsoft.springsand.exception.BadRequestStatusException;
 import jp.dip.gpsoft.springsand.model.Valley;
 import jp.dip.gpsoft.springsand.service.ValleyService;
@@ -24,11 +27,16 @@ public class ValleyController {
 	private ValleyService valleyService;
 
 	@GetMapping
-	public String index(Model model, @RequestParam Map<String, String> params) {
+	public String index(Model model, @RequestParam Map<String, String> params, @PageableDefault(
+			size = 10) Pageable pageable) {
 		String q = params.get("q");
+		System.out.println(pageable.toString());
 		model.addAttribute("valleys",
-				q == null ? valleyService.findAllValleys() : valleyService.findValleys("%"+q+"%"));
+				q == null ? valleyService.findAllValleys(pageable)
+						: valleyService.findValleys("%" + q + "%", pageable));
 		model.addAttribute("q", q);
+		model.addAttribute("pathWithPage", Utils.pathWithPage("", pageable, "q", q));
+		model.addAttribute("pathWithSort", Utils.pathWithSort("", pageable, "q", q));
 		return "valley/index";
 	}
 
