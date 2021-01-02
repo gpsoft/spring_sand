@@ -4,6 +4,7 @@ function jsConfirmAndSubmit(anchor, action) {
 }
 
 function jsChangeLocationInput(radio) {
+	if ( radio == null ) return;
 	let isPref = radio.hasAttribute('data-pref-flg');
 	jsToggleInput(document.querySelector('#jsLocationByText'), !isPref);
 	jsToggleInput(document.querySelector('#jsLocationBySelect'), isPref);
