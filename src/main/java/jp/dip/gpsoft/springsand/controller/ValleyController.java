@@ -1,7 +1,5 @@
 package jp.dip.gpsoft.springsand.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -27,10 +25,8 @@ public class ValleyController {
 	private ValleyService valleyService;
 
 	@GetMapping
-	public String index(Model model, @RequestParam Map<String, String> params, @PageableDefault(
-			size = 10) Pageable pageable) {
-		String q = params.get("q");
-		System.out.println(pageable.toString());
+	public String index(Model model, @RequestParam(name = "q", required = false) String q,
+			@PageableDefault(size = 10) Pageable pageable) {
 		model.addAttribute("valleys",
 				q == null ? valleyService.findAllValleys(pageable)
 						: valleyService.findValleys("%" + q + "%", pageable));
