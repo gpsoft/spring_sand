@@ -19,7 +19,7 @@
 				<a href="#" th:href="@{/rivers}">Back to the list</a>
 			</section>
 			<section>
-				<form th:action="*{isNew} ? @{/rivers} : @{/rivers/{id}(id=*{id})}" th:method="post">
+				<form th:action="*{isNew} ? @{/rivers} : @{/rivers/{id}(id=*{id})}" method="post">
 					<input th:unless="*{isNew}" type="hidden" name="id" th:value="*{id}" />
 					<div class="rows">
 						<div class="row-sbs">

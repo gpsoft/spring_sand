@@ -27,13 +27,13 @@
 					</div>
 					<div class="row-4" th:each="river: ${rivers}" th:object="${river}">
 						<div class="col">
-							<a href="#" th:href="@{/rivers/{id}(id=*{id})}" th:text="${river.name}">river1</a>
+							<a href="#" th:href="@{/rivers/{id}(id=*{id})}" th:text="*{name}">river1</a>
 						</div>
-						<div class="col" th:text="${river.source}">from1</div>
-						<div class="col" th:text="${river.mouse}">to1</div>
+						<div class="col" th:text="*{source}">from1</div>
+						<div class="col" th:text="*{mouse}">to1</div>
 						<div class="col">
 							<a class="ope" href="#" th:href="@{/rivers/{id}/edit(id=*{id})}">Edit</a>
-							<form class="ope-form" th:action="@{/rivers/{id}/delete(id=*{id})}" th:method="post">
+							<form class="ope-form" th:action="@{/rivers/{id}/delete(id=*{id})}" method="post">
 								<a class="ope" href="javascript:void(0);" onclick="jsConfirmAndSubmit(this, '削除')">Del</a>
 							</form>
 						</div>
