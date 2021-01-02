@@ -16,7 +16,7 @@ Springフレームワークの実験プロジェクト。
 
 - `CRUD of Rivers` ...超シンプルなCRUDのサンプル
 - `CRUD of Lakes` ...バリデーションチェックと`Form`クラスのサンプル
-- `CRUD of Valleys` ...未定
+- `CRUD of Valleys` ...検索、ページャ、ソートのサンプル
 - `Auth` ...未定
 - `CRUD of Users` ...未定
 
@@ -52,3 +52,19 @@ Riversとの大きな違いは2つ。
 - ControllerとViewの間のデータ交換用に、`Lake`クラスではなく`LakeForm`クラスを使う
 
 `LakeForm`クラスを導入する理由は、入力画面の入力項目とモデルのフィールドが1:1に対応しないから。
+
+## Valleys
+
+構成はRiversと同じ。一覧ページ(`/valleys`へのGETリクエスト)に、以下の機能を追加した。
+
+- 検索
+- ページング
+- ソート
+
+クエリ文字列パラメータは以下の通り。
+
+- `q` ...検索キーワード(部分一致)
+- `page` ...ページ番号(0オリジン)
+- `sort` ...ソートキー(`id`か`name`)と方向(`asc`か`desc`)
+
+`sort`パラメータは複数指定可能(`/valleys?sort=id,asc&sort=name,desc`など)。
