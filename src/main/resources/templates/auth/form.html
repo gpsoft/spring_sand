@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Login</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	</head>
+	<body>
+		<section class="container" th:object="${authForm}">
+			<section>
+				<h2>Login</h2>
+			</section>
+			<section>
+				<p class="danger" th:if="${param.error}">ログインできませんでした。</p>
+			</section>
+			<section>
+				<form th:action="@{/auth}" th:method="post">
+					<div class="rows">
+						<div class="row-sbs">
+							<div class="col head-col">User ID</div>
+							<div class="col">
+								<input type="text" name="userid"
+												th:class="${#fields.hasErrors('userid')} ? 'with-error' : ''"
+												placeholder="ユーザID" />
+								<p class="error-msg" th:if="${#fields.hasErrors('userid')}" th:errors="*{userid}">no!</p>
+							</div>
+						</div>
+						<div class="row-sbs">
+							<div class="col head-col">Password</div>
+							<div class="col">
+								<input type="password" name="passwd" th:value="*{passwd}"
+												th:class="${#fields.hasErrors('passwd')} ? 'with-error' : ''" />
+								<p class="error-msg" th:if="${#fields.hasErrors('passwd')}" th:errors="*{passwd}">no!</p>
+							</div>
+						</div>
+					</div>
+					<div class="rows">
+						<div class="row-sbs">
+							<div class="col head-col"></div>
+							<div class="col">
+								<input class="ope" type="submit" value="Login" />
+							</div>
+						</div>
+					</div>
+				</form>
+			</section>
+		</section>
+	</body>
+</html>

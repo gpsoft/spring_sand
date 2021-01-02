@@ -26,6 +26,10 @@ input[type=submit] {
 	margin-right: 4px;
 }
 
+.danger {
+	color: #ff0000;
+}
+
 .container {
 	margin: 0 auto;
 	max-width: 800px;

@@ -7,12 +7,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import jp.dip.gpsoft.springsand.model.Lake;
 import jp.dip.gpsoft.springsand.model.River;
+import jp.dip.gpsoft.springsand.model.User;
 import jp.dip.gpsoft.springsand.model.Valley;
 import jp.dip.gpsoft.springsand.repository.LakeRepository;
 import jp.dip.gpsoft.springsand.repository.RiverRepository;
+import jp.dip.gpsoft.springsand.repository.UserRepository;
 import jp.dip.gpsoft.springsand.repository.ValleyRepository;
 
 @SpringBootApplication
@@ -26,6 +29,9 @@ public class SpringSandApplication {
 
 	@Autowired
 	private ValleyRepository valleyRepository;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringSandApplication.class, args);
@@ -49,13 +55,17 @@ public class SpringSandApplication {
 			lakeRepository.save(shinji);
 			Lake hamana = new Lake("浜名湖", "静岡県", 65);
 			lakeRepository.save(hamana);
-			IntStream.rangeClosed(1,100).forEach(n->{
-				valleyRepository.save(new Valley("谷"+String.format("%02d", n)));
+			IntStream.rangeClosed(1, 100).forEach(n -> {
+				valleyRepository.save(new Valley("谷" + String.format("%02d", n)));
 			});
 			valleyRepository.save(new Valley("耶馬渓"));
 			valleyRepository.save(new Valley("帝釈峡"));
 			valleyRepository.save(new Valley("仙酔峡"));
 			valleyRepository.save(new Valley("Yosemite & Kalalau"));
+
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			userRepository.save(new User("user", encoder.encode("user"), "ROLE_USER"));
+			userRepository.save(new User("admin", encoder.encode("admin"), "ROLE_ADMIN"));
 		};
 	}
 }
