@@ -8,8 +8,10 @@ import org.springframework.context.annotation.Bean;
 
 import jp.dip.gpsoft.springsand.model.Lake;
 import jp.dip.gpsoft.springsand.model.River;
+import jp.dip.gpsoft.springsand.model.Valley;
 import jp.dip.gpsoft.springsand.repository.LakeRepository;
 import jp.dip.gpsoft.springsand.repository.RiverRepository;
+import jp.dip.gpsoft.springsand.repository.ValleyRepository;
 
 @SpringBootApplication
 public class SpringSandApplication {
@@ -19,6 +21,9 @@ public class SpringSandApplication {
 
 	@Autowired
 	private LakeRepository lakeRepository;
+
+	@Autowired
+	private ValleyRepository valleyRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringSandApplication.class, args);
@@ -42,6 +47,10 @@ public class SpringSandApplication {
 			lakeRepository.save(shinji);
 			Lake hamana = new Lake("浜名湖", "静岡県", 65);
 			lakeRepository.save(hamana);
+			Valley valley = new Valley("耶馬渓");
+			valleyRepository.save(valley);
+			valleyRepository.save(new Valley("帝釈峡"));
+			valleyRepository.save(new Valley("仙酔峡"));
 		};
 	}
 }

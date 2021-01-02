@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Spring Sand</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	</head>
+	<body>
+		<section class="container">
+			<section>
+				<h2>List of valleys</h2>
+			</section>
+			<section th:if="${valleys.size} <= 0">
+				<p>Sorry, we have no valleys for now.</p>
+			</section>
+			<section th:if="${valleys.size} > 0">
+				<div class="rows">
+					<div class="row-4 head-row">
+						<div class="col">name</div>
+						<div class="col">operation</div>
+					</div>
+					<div class="row-4" th:each="valley: ${valleys}" th:object="${valley}">
+						<div class="col">
+							<a href="#" th:href="@{/valleys/{id}(id=*{id})}" th:text="*{name}">valley1</a>
+						</div>
+						<div class="col">
+							<a class="ope" href="#" th:href="@{/valleys/{id}/edit(id=*{id})}">Edit</a>
+							<form class="ope-form" th:action="@{/valleys/{id}/delete(id=*{id})}" method="post">
+								<a class="ope" href="javascript:void(0);" onclick="jsConfirmAndSubmit(this, '削除')">Del</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section>
+				<a class="ope" href="#" th:href="@{/valleys/new}">Add New Valley</a>
+			</section>
+		</section>
+		<script type="text/javascript" th:src="@{/js/script.js}"></script>
+	</body>
+</html>
