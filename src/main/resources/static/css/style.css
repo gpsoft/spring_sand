@@ -8,7 +8,6 @@
 * {
 	box-sizing:border-box
 }
-}
 
 body {
 	font-size: 16px;
@@ -21,6 +20,10 @@ h1,h2,h3,section {
 input[type=submit] {
 	font-size: 16px;
 	border: none;
+}
+
+.mr-4 {
+	margin-right: 4px;
 }
 
 .container {

@@ -27,6 +27,10 @@ public class ValleyService {
 		return valleyRepository.findAll();
 	}
 
+	public List<Valley> findValleys(String name) {
+		return valleyRepository.findByNameLike(name);
+	}
+
 	@Transactional(readOnly = false)
 	public void saveValley(Valley valley) {
 		valleyRepository.save(valley);

@@ -1,5 +1,7 @@
 package jp.dip.gpsoft.springsand.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.dip.gpsoft.springsand.exception.BadRequestStatusException;
 import jp.dip.gpsoft.springsand.model.Valley;
@@ -21,8 +24,11 @@ public class ValleyController {
 	private ValleyService valleyService;
 
 	@GetMapping
-	public String index(Model model) {
-		model.addAttribute("valleys", valleyService.findAllValleys());
+	public String index(Model model, @RequestParam Map<String, String> params) {
+		String q = params.get("q");
+		model.addAttribute("valleys",
+				q == null ? valleyService.findAllValleys() : valleyService.findValleys("%"+q+"%"));
+		model.addAttribute("q", q);
 		return "valley/index";
 	}
 

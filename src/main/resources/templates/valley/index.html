@@ -14,8 +14,13 @@
 			<section>
 				<h2>List of valleys</h2>
 			</section>
+			<section>
+				<form th:action="@{/valleys}" method="get">
+					<input class="mr-4" type="text" name="q" th:value="${q}"/><input class="ope" type="submit" value="Search" />
+				</form>
+			</section>
 			<section th:if="${valleys.size} <= 0">
-				<p>Sorry, we have no valleys for now.</p>
+				<p>No valleys matched.</p>
 			</section>
 			<section th:if="${valleys.size} > 0">
 				<div class="rows">

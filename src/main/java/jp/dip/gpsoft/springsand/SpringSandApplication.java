@@ -1,5 +1,7 @@
 package jp.dip.gpsoft.springsand;
 
+import java.util.stream.IntStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -51,6 +53,9 @@ public class SpringSandApplication {
 			valleyRepository.save(valley);
 			valleyRepository.save(new Valley("帝釈峡"));
 			valleyRepository.save(new Valley("仙酔峡"));
+			IntStream.rangeClosed(1,100).forEach(n->{
+				valleyRepository.save(new Valley("谷"+String.format("%02d", n)));
+			});
 		};
 	}
 }
