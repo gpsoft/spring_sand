@@ -17,8 +17,9 @@ Springフレームワークの実験プロジェクト。
 - `CRUD of Rivers` ...超シンプルなCRUDのサンプル
 - `CRUD of Lakes` ...バリデーションチェックと`Form`クラスのサンプル
 - `CRUD of Valleys` ...検索、ページャ、ソートのサンプル
-- `Auth` ...未定
+- `Auth` ...AuthenticationとAuthorization
 - `CRUD of Users` ...未定
+- `Layout` ...全ページに共通レイアウトを適用
 
 ## Rivers
 
@@ -68,3 +69,16 @@ Riversとの大きな違いは2つ。
 - `sort` ...ソートキー(`id`か`name`)と方向(`asc`か`desc`)
 
 `sort`パラメータは複数指定可能(`/valleys?sort=id,asc&sort=name,desc`など)。
+
+## Auth
+
+### Authentication(認証)
+
+- admin/adminでログイン(ADMINロール)
+- user/userでログイン(USERロール)
+
+### Authorization(認可)
+
+- Riversは誰でも可
+- Lakesは、ログイン必須
+- Valleysは、ADMINロールが必要
