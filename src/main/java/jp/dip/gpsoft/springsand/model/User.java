@@ -16,14 +16,16 @@ public class User {
 	private String loginId;
 	private String password;
 	private String roles;
+	private String avatarFile;
 
 	public User() {
 	}
 
-	public User(String loginId, String pwEncoded, String roles) {
+	public User(String loginId, String pwEncoded, String roles, String avatar) {
 		this.loginId = loginId;
 		password = pwEncoded;
 		this.roles = roles;
+		avatarFile = avatar;
 	}
 
 	public Integer getId() {
@@ -56,5 +58,13 @@ public class User {
 
 	public void setRoles(String roles) {
 		this.roles = roles;
+	}
+
+	public String getAvatarFile() {
+		return avatarFile;
+	}
+
+	public void setAvatarFile(String avatarFile) {
+		this.avatarFile = avatarFile;
 	}
 }

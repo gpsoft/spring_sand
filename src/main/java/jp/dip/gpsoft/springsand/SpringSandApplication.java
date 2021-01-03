@@ -64,8 +64,8 @@ public class SpringSandApplication {
 			valleyRepository.save(new Valley("Yosemite & Kalalau"));
 
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			userRepository.save(new User("user", encoder.encode("user"), "ROLE_USER"));
-			userRepository.save(new User("admin", encoder.encode("admin"), "ROLE_ADMIN"));
+			userRepository.save(new User("user", encoder.encode("user"), "ROLE_USER", "i.jpg"));
+			userRepository.save(new User("admin", encoder.encode("admin"), "ROLE_ADMIN", "h.jpg"));
 		};
 	}
 }

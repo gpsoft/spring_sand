@@ -13,6 +13,14 @@
 			<h2>Welcome to Spring Sand</h2>
 		</section>
 		<section>
+			<a sec:authorize="isAnonymous()" href="#" th:href="@{/login}">Login</a>
+			<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+				<img width="24" th:src="@{/img/{avatarFile}(avatarFile=${#authentication.principal.avatarFile})}" />
+				<span th:text="${#authentication.principal.username}">user</span>
+				<input type="submit" value="Logout" />
+			</form>
+		</section>
+		<section>
 			<h3>Menu</h3>
 			<ul>
 				<li><a href="#" th:href="@{/rivers}">CRUD of Rivers</a>

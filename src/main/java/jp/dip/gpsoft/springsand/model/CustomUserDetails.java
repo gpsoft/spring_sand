@@ -16,6 +16,10 @@ public class CustomUserDetails implements UserDetails {
 		this.user = user;
 	}
 
+	public String getAvatarFile() {
+		return user.getAvatarFile();
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Stream.of(user.getRoles().split(","))
@@ -52,5 +56,4 @@ public class CustomUserDetails implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-
 }
