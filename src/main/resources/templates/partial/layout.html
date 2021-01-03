@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<title>Spring Sand</title>
+	</head>
+	<body>
+		<section class="container">
+			<section class="header">
+				<div><a class="brand" th:href="@{/}">Spring Sand</a></div>
+				<div class="user-info">
+					<a class="ope" sec:authorize="isAnonymous()" href="#" th:href="@{/login}">Login</a>
+					<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+						<img class="avatar" th:src="@{/img/{avatarFile}(avatarFile=${#authentication.principal.avatarFile})}" />
+						<span th:text="${#authentication.principal.username}">user</span>
+						<input type="submit" value="Logout" />
+					</form>
+				</div>
+			</section>
+			<div layout:fragment="contents"></div>
+		</section>
+		<script type="text/javascript" th:src="@{/js/script.js}"></script>
+	</body>
+</html>
+

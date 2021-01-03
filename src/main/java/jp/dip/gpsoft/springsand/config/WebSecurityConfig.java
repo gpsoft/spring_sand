@@ -89,12 +89,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		if (Arrays.asList(env.getActiveProfiles()).contains("dev")) {
-			auth.inMemoryAuthentication()	// DBを使わずに認証するための設定
-					.withUser("test")
-						.password(passwordEncoder().encode("test"))
-						.roles("USER");
-		}
+		//if (Arrays.asList(env.getActiveProfiles()).contains("dev")) {
+		//	auth.inMemoryAuthentication()	// DBを使わずに認証するための設定
+		//			.withUser("test")
+		//				.password(passwordEncoder().encode("test"))
+		//				.roles("USER");
+		//}
 		// ■DBを使って認証するには
 		// ◇必要なもの
 		//   - UserDetailsインターフェイスをimplementsしたクラス
