@@ -54,11 +54,17 @@ input[type=submit] {
 
 .user-info {
 	position: absolute;
-	top: 8px;
+	top: 50%;
 	right: 8px;
+	transform: translateY(-50%);
 }
 .user-info .avatar {
-	height: 17px;
+	height: 16px;
+	vertical-align: middle;
+	border-radius: 50%;
+}
+.user-info form {
+	display: inline;
 }
 .user-info input {
 	text-decoration: none;

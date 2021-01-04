@@ -1,6 +1,7 @@
 package jp.dip.gpsoft.springsand.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -16,7 +17,8 @@ public class AuthController {
 	}
 
 	@GetMapping("/login")
-	public String loginForm() {
+	public String loginForm(Model model) {
+		model.addAttribute("noLoginBtn", true);
 		return "auth/form";
 	}
 }

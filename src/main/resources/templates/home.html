@@ -11,9 +11,11 @@
 			<p th:if="${param.logout}">ログアウトしました。</p>
 			<h3>Menu</h3>
 			<ul class="menu">
-				<li><a href="#" th:href="@{/rivers}">CRUD of Rivers</a>
-				<li><a href="#" th:href="@{/lakes}">CRUD of Lakes</a>
-				<li><a href="#" th:href="@{/valleys}">CRUD of Valleys</a>
+				<li><a href="#" th:href="@{/rivers}">CRUD of Rivers</a></li>
+				<li><a href="#" th:href="@{/lakes}">CRUD of Lakes</a></li>
+				<li sec:authorize="isAnonymous() or hasRole('ROLE_ADMIN')">
+					<a href="#" th:href="@{/valleys}">CRUD of Valleys</a>
+				</li>
 			</ul>
 		</section>
 	</body>

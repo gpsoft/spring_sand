@@ -15,12 +15,16 @@
 			<section class="header">
 				<div><a class="brand" th:href="@{/}">Spring Sand</a></div>
 				<div class="user-info">
-					<a class="ope" sec:authorize="isAnonymous()" href="#" th:href="@{/login}">Login</a>
-					<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-						<img class="avatar" th:src="@{/img/{avatarFile}(avatarFile=${#authentication.principal.avatarFile})}" />
+					<div sec:authorize="isAnonymous()" th:unless="${noLoginBtn}">
+						<a class="ope" href="#" th:href="@{/login}">Login</a>
+					</div> 
+					<div sec:authorize="isAuthenticated()">
+						<img class="avatar" th:src="@{/img/{fname}(fname=${#authentication.principal.avatarFile})}" />
 						<span th:text="${#authentication.principal.username}">user</span>
-						<input type="submit" value="Logout" />
-					</form>
+						<form th:action="@{/logout}" method="post">
+							<input type="submit" value="Logout" />
+						</form>
+					</div>
 				</div>
 			</section>
 			<div layout:fragment="contents"></div>
