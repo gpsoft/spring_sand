@@ -70,6 +70,11 @@ Riversとの大きな違いは2つ。
 
 `sort`パラメータは複数指定可能(`/valleys?sort=id,asc&sort=name,desc`など)。
 
+また、`@Query`アノテーションを利用して任意の`SELECT`文を実行するサンプルにもなっている。ポイントは以下の通り。
+
+- 検索キーワードの有無によらず、1つの`SELECT`文で済むように、`WHERE`句を細工した
+- `countQuery`要素を指定することにより、ページングに使えるようにした
+
 ## Auth
 
 ### Authentication(認証)
