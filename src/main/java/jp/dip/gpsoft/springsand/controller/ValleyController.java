@@ -27,9 +27,7 @@ public class ValleyController {
 	@GetMapping
 	public String index(Model model, @RequestParam(name = "q", required = false) String q,
 			@PageableDefault(size = 10) Pageable pageable) {
-		model.addAttribute("valleys",
-				q == null ? valleyService.findAllValleys(pageable)
-						: valleyService.findValleys("%" + q + "%", pageable));
+		model.addAttribute("valleys", valleyService.findValleys(q, pageable));
 		model.addAttribute("q", q);
 		model.addAttribute("pathWithPage", Utils.pathWithPage("", pageable, "q", q));
 		model.addAttribute("pathWithSort", Utils.pathWithSort("", pageable, "q", q));

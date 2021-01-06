@@ -26,22 +26,15 @@ public class ValleyService {
 		return maybeValley.orElseThrow(NotFoundStatusException::new);
 	}
 
-	public List<Valley> findAllValleys() {
-		return valleyRepository.findAll();
-	}
-
-	public Page<Valley> findAllValleys(Pageable pageable) {
-		return valleyRepository.findAll(pageable);
-	}
-
-	public List<Valley> findValleys(String name) {
-		return valleyRepository.findByNameLike(name);
-	}
-
 	public Page<Valley> findValleys(String name, Pageable pageable) {
+		if (name == null || name.isEmpty()) {
+			return valleyRepository.findAll(pageable);
+		}
+		name = "%" + name + "%";
 		List<Valley> list = valleyRepository.findByNameLike(name, pageable);
 		long count = valleyRepository.countByNameLike(name);
 		return new PageImpl<Valley>(list, pageable, count);
+
 	}
 
 	@Transactional(readOnly = false)

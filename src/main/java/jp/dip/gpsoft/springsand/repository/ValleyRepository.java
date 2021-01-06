@@ -8,8 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import jp.dip.gpsoft.springsand.model.Valley;
 
 public interface ValleyRepository extends JpaRepository<Valley, Integer> {
-	List<Valley> findByNameLike(String name);
-
 	long countByNameLike(String name);
 
 	List<Valley> findByNameLike(String name, Pageable pageable);
