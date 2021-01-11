@@ -21,11 +21,37 @@
 					<div class="rows">
 						<div class="row-sbs">
 							<div class="col head-col">loginId</div>
-							<div class="col">
+							<div th:if="*{isNew}" class="col">
 								<input type="text" name="loginId" th:value="*{loginId}"
 												th:class="${#fields.hasErrors('loginId')} ? 'with-error' : ''"
 												placeholder="ログインID" />
 								<p class="error-msg" th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}">no!</p>
+							</div>
+							<div th:unless="*{isNew}" class="col">
+								<p th:text="*{loginId}">loginId</p>
+								<input type="hidden" name="loginId" th:value="*{loginId}" />
+							</div>
+						</div>
+						<div class="row-sbs">
+							<div class="col head-col">password</div>
+							<div class="col">
+								<input type="password" name="password" th:value="*{password}"
+												th:class="${#fields.hasErrors('password')} ? 'with-error' : ''"
+												placeholder="パスワード" />
+								<p class="input-msg" th:unless="*{isNew}">パスワードを変更しない場合は、未入力のままにしてください。</p>
+								<p class="error-msg" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">no!</p>
+							</div>
+						</div>
+						<div class="row-sbs">
+							<div class="col head-col">roles</div>
+							<div class="col">
+								<th:block th:each="role : ${userForm.allRoles}">
+									<label>
+										<input type="checkbox" name="roles[]" th:value="${role}" th:field="*{roles}" />
+										<span th:text="${role}"></span>
+									</label>
+								</th:block>
+								<p class="error-msg" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">no!</p>
 							</div>
 						</div>
 					</div>

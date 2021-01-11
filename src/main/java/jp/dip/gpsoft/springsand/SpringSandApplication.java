@@ -7,7 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import jp.dip.gpsoft.springsand.model.Lake;
 import jp.dip.gpsoft.springsand.model.River;
@@ -32,6 +32,9 @@ public class SpringSandApplication {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private PasswordEncoder pwEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringSandApplication.class, args);
@@ -63,9 +66,10 @@ public class SpringSandApplication {
 			valleyRepository.save(new Valley("仙酔峡"));
 			valleyRepository.save(new Valley("Yosemite & Kalalau"));
 
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			userRepository.save(new User("user", encoder.encode("user"), "ROLE_USER", "i.jpg"));
-			userRepository.save(new User("admin", encoder.encode("admin"), "ROLE_ADMIN", "h.jpg"));
+			userRepository.save(new User("user", pwEncoder.encode("user"), Role.ROLE_USER,
+					"i.jpg"));
+			userRepository.save(new User("admin", pwEncoder.encode("admin"), Role.ROLE_ADMIN,
+					"h.jpg"));
 		};
 	}
 }

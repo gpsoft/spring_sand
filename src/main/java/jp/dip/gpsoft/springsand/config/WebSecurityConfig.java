@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()					// 無視(認証も認可も不要)
-				.antMatchers("/css/**", "/js/**", "/fonts/**", "/img/**");
+				.antMatchers("/favicon.ico", "/css/**", "/js/**", "/fonts/**", "/img/**");
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()		// 認可に関する設定
 				// URLパスのパターンと、認可条件のペアで指定
 				.antMatchers("/", "/rivers/**").permitAll()		// 誰でもOK
-				.antMatchers("/login", "/auth").permitAll()
+				.antMatchers("/login", "/auth", "/error").permitAll()
 				.antMatchers("/logout").authenticated()			// 認証済みなら誰でもOK
 				.antMatchers("/lakes/**").authenticated()
 				.antMatchers("/valleys/**").hasRole("ADMIN")	// ロールチェック

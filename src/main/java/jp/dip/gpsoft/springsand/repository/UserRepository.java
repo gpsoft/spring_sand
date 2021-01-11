@@ -6,4 +6,6 @@ import jp.dip.gpsoft.springsand.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 	User findByLoginId(String loginId);
+
+	int countByLoginId(String loginId);
 }

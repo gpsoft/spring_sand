@@ -122,8 +122,11 @@ input[type=submit] {
 input.with-error {
 	border-color: #ff0000;
 }
+.input-msg,
 .error-msg {
 	font-size: 0.8em;
+}
+.error-msg {
 	color: #ff0000;
 }
 

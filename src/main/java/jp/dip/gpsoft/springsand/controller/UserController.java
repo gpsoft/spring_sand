@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jp.dip.gpsoft.springsand.exception.BadRequestStatusException;
 import jp.dip.gpsoft.springsand.form.UserForm;
 import jp.dip.gpsoft.springsand.service.UserService;
+import jp.dip.gpsoft.springsand.validation.OnInsert;
+import jp.dip.gpsoft.springsand.validation.OnUpdate;
 
 @Controller
 @RequestMapping("/users")
@@ -47,24 +49,25 @@ public class UserController {
 	}
 
 	@PostMapping("")
-	public String create(@Validated @ModelAttribute UserForm user, BindingResult result) {
+	public String create(@Validated(OnInsert.class) @ModelAttribute UserForm user,
+			BindingResult result) {
 		if (result.hasErrors()) {
 			return "user/form";
 		}
-		userService.saveUser(user.toUser());
+		userService.saveUser(user);
 		return "redirect:/users";
 	}
 
 	@PostMapping("/{id:^[\\d]+$}")
 	public String update(@PathVariable("id") Integer id,
-			@Validated @ModelAttribute UserForm user, BindingResult result) {
+			@Validated(OnUpdate.class) @ModelAttribute UserForm user, BindingResult result) {
 		if (!id.equals(user.getId())) {
 			throw new BadRequestStatusException();
 		}
 		if (result.hasErrors()) {
 			return "user/form";
 		}
-		userService.saveUser(user.toUser());
+		userService.saveUser(user);
 		return "redirect:/users";
 	}
 
