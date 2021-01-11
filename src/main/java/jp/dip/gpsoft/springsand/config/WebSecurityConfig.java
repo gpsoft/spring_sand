@@ -68,6 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/logout").authenticated()			// 認証済みなら誰でもOK
 				.antMatchers("/lakes/**").authenticated()
 				.antMatchers("/valleys/**").hasRole("ADMIN")	// ロールチェック
+				.antMatchers("/users/**").hasRole("ADMIN")
 				.anyRequest().denyAll();						// 上記以外は、全部NG
 
 		http.formLogin()				// フォーム認証に関する設定

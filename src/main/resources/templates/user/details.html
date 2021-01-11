@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				layout:decorate="~{partial/layout}">
+	<head>
+	</head>
+	<body>
+		<section layout:fragment="contents">
+			<section>
+				<h2>Details of the user</h2>
+			</section>
+			<section style="text-align:right">
+				<a href="#" th:href="@{/users}">Back to the list</a>
+			</section>
+			<section>
+				<div class="rows" th:object="${user}">
+					<div class="row-sbs">
+						<div class="col head-col">loinId</div>
+						<div class="col" th:text="*{loginId}">user</div>
+					</div>
+				</div>
+			</section>
+			<section>
+				<a class="ope" href="#" th:href="@{/users/{id}/edit(id=*{id})}">Edit</a>
+				<form class="ope-form" th:action="@{/users/{id}/delete(id=*{id})}" th:method="post">
+					<a class="ope" href="javascript:void(0);" onclick="jsConfirmAndSubmit(this, '削除')">Del</a>
+				</form>
+			</section>
+		</section>
+	</body>
+</html>

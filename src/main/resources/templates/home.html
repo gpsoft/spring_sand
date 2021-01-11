@@ -16,6 +16,9 @@
 				<li sec:authorize="isAnonymous() or hasRole('ROLE_ADMIN')">
 					<a href="#" th:href="@{/valleys}">CRUD of Valleys</a>
 				</li>
+				<li sec:authorize="isAnonymous() or hasRole('ROLE_ADMIN')">
+					<a href="#" th:href="@{/users}">CRUD of Users</a>
+				</li>
 			</ul>
 		</section>
 	</body>
