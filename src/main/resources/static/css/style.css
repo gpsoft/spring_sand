@@ -42,7 +42,7 @@ input[type=submit] {
 	padding: 0 4px;
 	text-decoration: none;
 	text-transform: uppercase;
-	font-size: 1.4em;
+	font-size: 2em;
 	font-weight: bold;
 }
 .brand:visited {
@@ -52,6 +52,10 @@ input[type=submit] {
 	background-color: #777777;
 }
 
+.avatar {
+	max-width: 100px;
+}
+
 .user-info {
 	position: absolute;
 	top: 50%;
@@ -59,7 +63,7 @@ input[type=submit] {
 	transform: translateY(-50%);
 }
 .user-info .avatar {
-	height: 16px;
+	height: 32px;
 	vertical-align: middle;
 	border-radius: 50%;
 }

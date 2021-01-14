@@ -18,7 +18,7 @@ Springフレームワークの実験プロジェクト。
 - `CRUD of Lakes` ...バリデーションチェックと`Form`クラスのサンプル
 - `CRUD of Valleys` ...検索、ページャ、ソートのサンプル
 - `Auth` ...AuthenticationとAuthorization
-- `CRUD of Users` ...未定
+- `CRUD of Users` ...ファイルアップロードなど
 - `Layout` ...全ページに共通レイアウトを適用
 
 ## Rivers
@@ -87,3 +87,9 @@ Riversとの大きな違いは2つ。
 - Riversは誰でも可
 - Lakesは、ログイン必須
 - Valleysは、ADMINロールが必要
+
+## Users
+
+- アバター画像のアップロード
+- チェックボックスで、ロールを複数選択
+- バリデーションチェックのグループ分け(新規登録のときだけ特定のバリデーションチェックを行う、とか)

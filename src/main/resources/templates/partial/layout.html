@@ -19,7 +19,7 @@
 						<a class="ope" href="#" th:href="@{/login}">Login</a>
 					</div> 
 					<div sec:authorize="isAuthenticated()">
-						<img class="avatar" th:src="@{/img/{fname}(fname=${#authentication.principal.avatarFile})}" />
+						<img class="avatar" th:src="${#authentication.principal.avatar} != '' ? ${#authentication.principal.avatar} : @{/img/default_avatar.jpg}" />
 						<span th:text="${#authentication.principal.username}">user</span>
 						<form th:action="@{/logout}" method="post">
 							<input type="submit" value="Logout" />

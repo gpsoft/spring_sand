@@ -66,10 +66,8 @@ public class SpringSandApplication {
 			valleyRepository.save(new Valley("仙酔峡"));
 			valleyRepository.save(new Valley("Yosemite & Kalalau"));
 
-			userRepository.save(new User("user", pwEncoder.encode("user"), Role.ROLE_USER,
-					"i.jpg"));
-			userRepository.save(new User("admin", pwEncoder.encode("admin"), Role.ROLE_ADMIN,
-					"h.jpg"));
+			userRepository.save(new User("user", pwEncoder.encode("user"), Role.ROLE_USER));
+			userRepository.save(new User("admin", pwEncoder.encode("admin"), Role.ROLE_ADMIN));
 		};
 	}
 }

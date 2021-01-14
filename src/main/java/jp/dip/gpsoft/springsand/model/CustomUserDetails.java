@@ -16,8 +16,8 @@ public class CustomUserDetails implements UserDetails {
 		this.user = user;
 	}
 
-	public String getAvatarFile() {
-		return user.getAvatarFile();
+	public String getAvatar() {
+		return user.getAvatar();
 	}
 
 	@Override

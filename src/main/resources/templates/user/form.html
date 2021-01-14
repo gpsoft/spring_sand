@@ -16,7 +16,7 @@
 				<a href="#" th:href="@{/users}">Back to the list</a>
 			</section>
 			<section>
-				<form th:action="*{isNew} ? @{/users} : @{/users/{id}(id=*{id})}" th:method="post">
+				<form th:action="*{isNew} ? @{/users} : @{/users/{id}(id=*{id})}" th:method="post" enctype="multipart/form-data">
 					<input th:unless="*{isNew}" type="hidden" name="id" th:value="*{id}" />
 					<div class="rows">
 						<div class="row-sbs">
@@ -52,6 +52,14 @@
 									</label>
 								</th:block>
 								<p class="error-msg" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">no!</p>
+							</div>
+						</div>
+						<div class="row-sbs">
+							<div class="col head-col">avatar</div>
+							<div class="col">
+								<input type="file" name="avatar" />
+								<p class="input-msg">ページ上部のアバターは、次回のログイン以降に更新されます。</p>
+								<img class="avatar" th:src="*{avatarSrc} != '' ? *{avatarSrc} : @{/img/default_avatar.jpg}" />
 							</div>
 						</div>
 					</div>
