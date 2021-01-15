@@ -81,6 +81,7 @@ Riversとの大きな違いは2つ。
 
 - admin/adminでログイン(ADMINロール)
 - user/userでログイン(USERロール)
+- Remember me機能付き
 
 ### Authorization(認可)
 

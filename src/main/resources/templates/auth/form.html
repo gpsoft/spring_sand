@@ -34,6 +34,12 @@
 								<p class="error-msg" th:if="${#fields.hasErrors('passwd')}" th:errors="*{passwd}">no!</p>
 							</div>
 						</div>
+						<div class="row-sbs">
+							<div class="col head-col"></div>
+							<div class="col">
+								<input name="rememberme" type="checkbox" checked />ログインしたままにする。
+							</div>
+						</div>
 					</div>
 					<div class="rows">
 						<div class="row-sbs">

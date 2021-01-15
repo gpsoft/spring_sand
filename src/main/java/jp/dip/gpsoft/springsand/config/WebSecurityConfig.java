@@ -86,6 +86,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.logout()					// ログアウトに冠する設定
 				.logoutUrl("/logout")				// ログアウトURL(ここへPOSTすると自動ログアウト)
 				.logoutSuccessUrl("/?logout");		// ログアウト後の遷移先
+		
+		http.rememberMe()
+				.rememberMeParameter("rememberme")
+				.tokenValiditySeconds(60*60*24*30/* 30 days */);
 	}
 
 	@Override
