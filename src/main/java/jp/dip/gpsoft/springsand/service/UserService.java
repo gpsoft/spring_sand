@@ -56,7 +56,7 @@ public class UserService {
 			user.setPassword(pwEncoder.encode(form.getPassword()));
 		}
 		user.setRoles(User.roles2RoleStrs(form.getRoles()));
-		user.setAvatar(form.loadAvatarSrc());
+		form.loadAvatarSrc().ifPresent(user::setAvatar);
 		userRepository.save(user);
 	}
 

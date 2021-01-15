@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
@@ -76,8 +77,8 @@ public class UserForm {
 		return Arrays.stream(Role.values()).map(Role::name).toArray(String[]::new);
 	}
 
-	public String loadAvatarSrc() {
-		if (avatar.isEmpty()) return "";
+	public Optional<String> loadAvatarSrc() {
+		if (avatar.isEmpty()) return Optional.empty();
 		try {
 			// get the uploaded file
 			BufferedImage img = ImageIO.read(avatar.getInputStream());
@@ -94,9 +95,9 @@ public class UserForm {
 			byte[] raw = out.toByteArray();
 			// convert for src attribute
 			String src = "data:image/png;base64," + Base64.getEncoder().encodeToString(raw);
-			return src;
+			return Optional.of(src);
 		} catch (IOException e) {
-			return "";
+			return Optional.empty();
 		}
 	}
 
