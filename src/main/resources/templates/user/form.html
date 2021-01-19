@@ -46,10 +46,9 @@
 							<div class="col head-col">roles</div>
 							<div class="col">
 								<th:block th:each="role : ${userForm.allRoles}">
-									<label>
-										<input type="checkbox" name="roles[]" th:value="${role}" th:field="*{roles}" />
-										<span th:text="${role}"></span>
-									</label>
+									<input type="checkbox" th:field="*{roles}" th:value="${role.id}" />
+									<label th:for="${#ids.prev('roles')}" 
+										   th:text="${role.name}">user</label>
 								</th:block>
 								<p class="error-msg" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">no!</p>
 							</div>

@@ -3,7 +3,6 @@ package jp.dip.gpsoft.springsand.form;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashSet;
 import java.util.Optional;
@@ -17,7 +16,7 @@ import org.hibernate.validator.constraints.Length;
 import org.imgscalr.Scalr;
 import org.springframework.web.multipart.MultipartFile;
 
-import jp.dip.gpsoft.springsand.Role;
+import jp.dip.gpsoft.springsand.model.Role;
 import jp.dip.gpsoft.springsand.model.User;
 import jp.dip.gpsoft.springsand.validation.OnInsert;
 import jp.dip.gpsoft.springsand.validation.UniqueLoginId;
@@ -40,18 +39,21 @@ public class UserForm {
 	private String password;
 
 	@Size(min = 1, message = "1つ以上のロールをチェックしてください。")
-	private Set<Role> roles;
+	private Set<String> roles;
 
 	private MultipartFile avatar;
 	private String avatarSrc;
+
+	private Set<Role> allRoles;
 
 	public UserForm() {
 		id = null;
 		loginId = null;
 		password = null;
-		roles = new HashSet<Role>();
+		roles = new HashSet<>();
 		avatar = null;
 		avatarSrc = "";
+		allRoles = null;
 	}
 
 	public UserForm(User user) {
@@ -61,20 +63,16 @@ public class UserForm {
 		roles = user.getRoleSet();
 		avatar = null;
 		avatarSrc = user.getAvatar();
+		allRoles = null;
 	}
 
 	@Override
 	public String toString() {
-		return "UserForm id=" + id + ", loginId=" + loginId + ", roles=" + User.roles2RoleStrs(
-				roles) + "]";
+		return "UserForm id=" + id + ", loginId=" + loginId + ", roles=" + roles.toString() + "]";
 	}
 
 	public boolean isNew() {
 		return id == null;
-	}
-
-	public String[] allRoles() {
-		return Arrays.stream(Role.values()).map(Role::name).toArray(String[]::new);
 	}
 
 	public Optional<String> loadAvatarSrc() {
@@ -127,11 +125,11 @@ public class UserForm {
 		this.password = password;
 	}
 
-	public Set<Role> getRoles() {
+	public Set<String> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(Set<String> roles) {
 		this.roles = roles;
 	}
 
@@ -145,5 +143,13 @@ public class UserForm {
 
 	public String getAvatarSrc() {
 		return avatarSrc;
+	}
+
+	public void setAllRoles(Set<Role> allRoles) {
+		this.allRoles = allRoles;
+	}
+
+	public Set<Role> getAllRoles() {
+		return allRoles;
 	}
 }

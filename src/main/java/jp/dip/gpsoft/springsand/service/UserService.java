@@ -2,6 +2,7 @@ package jp.dip.gpsoft.springsand.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.dip.gpsoft.springsand.exception.NotFoundStatusException;
 import jp.dip.gpsoft.springsand.form.UserForm;
+import jp.dip.gpsoft.springsand.model.Role;
 import jp.dip.gpsoft.springsand.model.User;
+import jp.dip.gpsoft.springsand.repository.RoleRepository;
 import jp.dip.gpsoft.springsand.repository.UserRepository;
 
 @Service
@@ -22,7 +25,23 @@ public class UserService {
 	private UserRepository userRepository;
 
 	@Autowired
+	private RoleRepository roleRepository;
+
+	@Autowired
 	private PasswordEncoder pwEncoder;
+
+	public UserForm emptyUserForm() {
+		return userFormWithAllRoles(new UserForm());
+	}
+
+	public UserForm userForm(Integer id) {
+		return userFormWithAllRoles(new UserForm(lookupUser(id)));
+	}
+
+	public UserForm userFormWithAllRoles(UserForm form) {
+		form.setAllRoles(roleRepository.findAll().stream().collect(Collectors.toSet()));
+		return form;
+	}
 
 	public User lookupUser(Integer id) {
 		Optional<User> maybeUser = userRepository.findById(id);
@@ -55,7 +74,7 @@ public class UserService {
 		if (!form.getPassword().isEmpty()) {
 			user.setPassword(pwEncoder.encode(form.getPassword()));
 		}
-		user.setRoles(User.roles2RoleStrs(form.getRoles()));
+		user.setRoles(form.getRoles().stream().map(Role::new).collect(Collectors.toSet()));
 		form.loadAvatarSrc().ifPresent(user::setAvatar);
 		userRepository.save(user);
 	}

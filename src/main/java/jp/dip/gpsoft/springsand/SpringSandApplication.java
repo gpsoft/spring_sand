@@ -11,10 +11,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import jp.dip.gpsoft.springsand.model.Lake;
 import jp.dip.gpsoft.springsand.model.River;
+import jp.dip.gpsoft.springsand.model.Role;
 import jp.dip.gpsoft.springsand.model.User;
 import jp.dip.gpsoft.springsand.model.Valley;
 import jp.dip.gpsoft.springsand.repository.LakeRepository;
 import jp.dip.gpsoft.springsand.repository.RiverRepository;
+import jp.dip.gpsoft.springsand.repository.RoleRepository;
 import jp.dip.gpsoft.springsand.repository.UserRepository;
 import jp.dip.gpsoft.springsand.repository.ValleyRepository;
 
@@ -32,6 +34,9 @@ public class SpringSandApplication {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private RoleRepository roleRepository;
 
 	@Autowired
 	private PasswordEncoder pwEncoder;
@@ -66,6 +71,8 @@ public class SpringSandApplication {
 			valleyRepository.save(new Valley("仙酔峡"));
 			valleyRepository.save(new Valley("Yosemite & Kalalau"));
 
+			roleRepository.save(new Role(Role.ROLE_USER, "一般ユーザ"));
+			roleRepository.save(new Role(Role.ROLE_ADMIN, "管理者"));
 			userRepository.save(new User("user", pwEncoder.encode("user"), Role.ROLE_USER));
 			userRepository.save(new User("admin", pwEncoder.encode("admin"), Role.ROLE_ADMIN));
 		};

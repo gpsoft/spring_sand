@@ -38,13 +38,13 @@ public class UserController {
 
 	@GetMapping("/new")
 	public String newUser(Model model) {
-		model.addAttribute("userForm", new UserForm());
+		model.addAttribute("userForm", userService.emptyUserForm());
 		return "user/form";
 	}
 
 	@GetMapping("/{id:^[\\d]+$}/edit")
 	public String editUser(@PathVariable("id") Integer id, Model model) {
-		model.addAttribute("userForm", new UserForm(userService.lookupUser(id)));
+		model.addAttribute("userForm", userService.userForm(id));
 		return "user/form";
 	}
 
@@ -52,6 +52,7 @@ public class UserController {
 	public String create(@Validated(OnInsert.class) @ModelAttribute UserForm user,
 			BindingResult result) {
 		if (result.hasErrors()) {
+			userService.userFormWithAllRoles(user);
 			return "user/form";
 		}
 		userService.saveUser(user);
@@ -61,10 +62,12 @@ public class UserController {
 	@PostMapping("/{id:^[\\d]+$}")
 	public String update(@PathVariable("id") Integer id,
 			@Validated(OnUpdate.class) @ModelAttribute UserForm user, BindingResult result) {
+		System.out.println(user.toString());
 		if (!id.equals(user.getId())) {
 			throw new BadRequestStatusException();
 		}
 		if (result.hasErrors()) {
+			userService.userFormWithAllRoles(user);
 			return "user/form";
 		}
 		userService.saveUser(user);

@@ -2,7 +2,6 @@ package jp.dip.gpsoft.springsand.model;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,7 +21,8 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Stream.of(user.getRoles().split(","))
+		return user.getRoles().stream()
+				.map(Role::getId)
 				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
 	}
