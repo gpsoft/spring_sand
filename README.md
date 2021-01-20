@@ -82,12 +82,19 @@ Riversとの大きな違いは2つ。
 - admin/adminでログイン(ADMINロール)
 - user/userでログイン(USERロール)
 - Remember me機能付き
+- `AuthController`
+
+| HTTPメソッド|URL |Controllerメソッド|テンプレート |
+| :---------- | :- | :--------------- | :---------- |
+| GET|`/login`|`loginForm()`|`auth/form.html` |
+| POST|`/login`| Spring Security |ログイン失敗なら、`/loginError`へForward |
+| - |`/loginError`| `loginError()` |`auth/form.html` |
 
 ### Authorization(認可)
 
 - Riversは誰でも可
 - Lakesは、ログイン必須
-- Valleysは、ADMINロールが必要
+- ValleysとUsersは、ADMINロールが必要
 
 ## Users
 

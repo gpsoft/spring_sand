@@ -12,10 +12,10 @@
 				<h2>Login</h2>
 			</section>
 			<section>
-				<p class="danger" th:if="${param.error}">ログインできませんでした。</p>
+				<p class="danger" th:if="${error}" th:text="${error}">ログイン失敗</p>
 			</section>
 			<section>
-				<form th:action="@{/auth}" th:method="post">
+				<form th:action="@{/login}" th:method="post">
 					<div class="rows">
 						<div class="row-sbs">
 							<div class="col head-col">User ID</div>

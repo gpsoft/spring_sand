@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.ForwardAuthenticationFailureHandler;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -64,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()		// 認可に関する設定
 				// URLパスのパターンと、認可条件のペアで指定
 				.antMatchers("/", "/rivers/**").permitAll()		// 誰でもOK
-				.antMatchers("/login", "/auth", "/error").permitAll()
+				.antMatchers("/login", "/error").permitAll()
 				.antMatchers("/logout").authenticated()			// 認証済みなら誰でもOK
 				.antMatchers("/lakes/**").authenticated()
 				.antMatchers("/valleys/**").hasRole("ADMIN")	// ロールチェック
@@ -79,8 +80,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginPage("/login")				// ログインページのURL
 				.usernameParameter("userid")		// useridと
 				.passwordParameter("passwd")		// passwdを
-				.loginProcessingUrl("/auth")		// /authへPOSTするとログイン処理を実行
-				.failureUrl("/login?error")			// ログイン失敗時の遷移先
+				.loginProcessingUrl("/login")		// /loginへPOSTするとログイン処理を実行
+				//.failureUrl("/login?error")			// ログイン失敗時の遷移先
+				.failureHandler(new ForwardAuthenticationFailureHandler("/loginError"))
 				.defaultSuccessUrl("/");			// ログイン後のデフォルトの遷移先
 
 		http.logout()					// ログアウトに冠する設定
