@@ -31,6 +31,7 @@ public class ValleyController {
 		model.addAttribute("q", q);
 		model.addAttribute("pathWithPage", Utils.pathWithPage("", pageable, "q", q));
 		model.addAttribute("pathWithSort", Utils.pathWithSort("", pageable, "q", q));
+		model.addAttribute("sortKeys", pageable.getSort().toString());
 		return "valley/index";
 	}
 

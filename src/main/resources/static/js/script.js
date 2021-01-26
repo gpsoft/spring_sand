@@ -17,4 +17,9 @@ function jsToggleInput(inp, on) {
 
 (()=>{
 	jsChangeLocationInput(document.querySelector('input[name="bySelect"]:checked'));
+
+	document.querySelector('select[name=valley-sorter]')
+		.addEventListener('change', ev=>{
+			location.href = ev.currentTarget.value;
+		});
 })();

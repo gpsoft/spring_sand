@@ -136,6 +136,7 @@ input.with-error {
 
 .pager {
 	margin: 8px 4px;
+	text-align: center;
 }
 .pager a {
 	display: inline-block;
@@ -143,16 +144,22 @@ input.with-error {
 	border: 1px solid #333333;
 	text-decoration: none;
 }
+.pager a.active {
+	background-color: #ff7e7e;
+	border-color: #ff0000;
+	color: #ffffff;
+	font-weight: bold;
+	pointer-events: none;
+}
 .pager a + a {
 	margin-left: 8px;
 }
 
-ul.sorter {
-	margin: 8px 4px;
+.sorter-wrap {
+	text-align: right;
 }
-ul.sorter li {
-	margin-left: 2em;
-	list-style: none;
+select.sorter {
+	padding: 4px 8px;
 }
 
 ul.menu {

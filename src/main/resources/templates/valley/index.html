@@ -25,23 +25,15 @@
 				<p><span>いま表示中のアイテム数: </span><span th:text="*{numberOfElements}">1</span></p>
 				<p><span>ソートキー: </span><span th:text="*{sort}">1</span></p>
 			</section>
-			<section th:if="${valleys.content.size} > 0" th:object="${valleys}">
-				<h3>ページングリンク</h3>
-				<div class="pager">
-					<a th:href="@{${pathWithSort}(page=0)}">最初</a>
-					<th:block th:each="i : ${#numbers.sequence(0, valleys.totalPages - 1)}">
-						<a th:href="@{${pathWithSort}(page=${i})}" th:text="${i+1}">0</a>
-					</th:block>
-					<a th:href="@{${pathWithSort}(page=*{totalPages-1})}">最後</a>
-				</div>
-			</section>
 			<section th:object="${valleys}">
-				<h3>ソートリンク</h3>
-				<ul class="sorter">
-					<li><a th:href="@{${pathWithPage}(sort=name)}">Name昇順</a></li>
-					<li><a th:href="@{${pathWithPage}(sort='name,desc')}">Name降順</a></li>
-					<li><a th:href="@{${pathWithPage}(sort=id,sort='name,desc')}">Id昇順&amp;Name降順</a></li>
-				</ul>
+				<div class="sorter-wrap">
+					<span>並べ替え: </span>
+					<select class="sorter" name="valley-sorter">
+						<option th:selected="${sortKeys}=='name: ASC'" th:value="@{${pathWithPage}(sort=name)}">Name昇順</option>
+						<option th:selected="${sortKeys}=='name: DESC'" th:value="@{${pathWithPage}(sort='name,desc')}">Name降順</option>
+						<option th:selected="${sortKeys}=='id: ASC,name: DESC'" th:value="@{${pathWithPage}(sort=id,sort='name,desc')}">Id昇順&amp;Name降順</option>
+					</select>
+				</div>
 			</section>
 			<section th:if="${valleys.content.size} <= 0">
 				<p>No valleys matched.</p>
@@ -67,6 +59,17 @@
 							</form>
 						</div>
 					</div>
+				</div>
+			</section>
+			<section th:if="${valleys.content.size} > 0" th:object="${valleys}">
+				<div class="pager">
+					<a th:href="@{${pathWithSort}(page=0)}">最初</a>
+					<th:block th:each="i : ${#numbers.sequence(0, valleys.totalPages - 1)}">
+						<a th:href="@{${pathWithSort}(page=${i})}"
+							th:text="${i+1}"
+							th:class="*{number}==${i}?'active':''">0</a>
+					</th:block>
+					<a th:href="@{${pathWithSort}(page=*{totalPages-1})}">最後</a>
 				</div>
 			</section>
 			<section>
