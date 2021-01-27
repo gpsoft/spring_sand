@@ -15,11 +15,15 @@ function jsToggleInput(inp, on) {
 	inp.disabled = !on;
 }
 
+function jsWatchValleySorter(sel) {
+	if ( sel == null ) return;
+	sel.addEventListener('change', ev=>{
+		location.href = ev.currentTarget.value;
+	});
+}
+
 (()=>{
 	jsChangeLocationInput(document.querySelector('input[name="bySelect"]:checked'));
 
-	document.querySelector('select[name=valley-sorter]')
-		.addEventListener('change', ev=>{
-			location.href = ev.currentTarget.value;
-		});
+	jsWatchValleySorter(document.querySelector('select[name=valley-sorter]'));
 })();
