@@ -25,7 +25,10 @@
 								<input type="text" name="loginId" th:value="*{loginId}"
 												th:class="${#fields.hasErrors('loginId')} ? 'with-error' : ''"
 												placeholder="ログインID" />
+								<span class="jsLoginIdAvailable success hidden">利用可能です。</span>
+								<span class="jsLoginIdUsed danger hidden">既に使われています。</span>
 								<p class="error-msg" th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}">no!</p>
+								<a href="#" th:href="@{/users/uniqueloginid}" class="jsAjaxUrlUniqueLoginId" style="display:none">ajax</a>
 							</div>
 							<div th:unless="*{isNew}" class="col">
 								<p th:text="*{loginId}">loginId</p>

@@ -1,5 +1,8 @@
 package jp.dip.gpsoft.springsand.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.dip.gpsoft.springsand.exception.BadRequestStatusException;
 import jp.dip.gpsoft.springsand.form.UserForm;
@@ -78,5 +83,13 @@ public class UserController {
 	public String destroy(@PathVariable("id") Integer id) {
 		userService.deleteUser(id);
 		return "redirect:/users";
+	}
+
+	@GetMapping("/uniqueloginid")
+	@ResponseBody
+	public Map<String, Object> ajaxUniqueLoginId(@RequestParam String loginId) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("unique", userService.isAvailableLoginId(loginId));
+		return res;
 	}
 }
