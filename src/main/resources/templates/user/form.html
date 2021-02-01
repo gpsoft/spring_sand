@@ -7,7 +7,7 @@
 	<head>
 	</head>
 	<body>
-		<section layout:fragment="contents" th:object="${userForm}">
+		<section class="main" layout:fragment="contents" th:object="${userForm}">
 			<section>
 				<h2 th:if="*{isNew}">Create a user</h2>
 				<h2 th:unless="*{isNew}">Edit the user</h2>

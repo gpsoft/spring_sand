@@ -7,7 +7,7 @@
 	<head>
 	</head>
 	<body>
-		<section layout:fragment="contents" th:object="${lakeForm}">
+		<section class="main" layout:fragment="contents" th:object="${lakeForm}">
 			<section>
 				<h2 th:if="*{isNew}">Create a lake</h2>
 				<h2 th:unless="*{isNew}">Edit the lake</h2>

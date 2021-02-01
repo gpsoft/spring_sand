@@ -7,7 +7,7 @@
 	<head>
 	</head>
 	<body>
-		<section layout:fragment="contents" th:object="${valley}">
+		<section class="main" layout:fragment="contents" th:object="${valley}">
 			<section>
 				<h2 th:if="*{isNew}">Create a valley</h2>
 				<h2 th:unless="*{isNew}">Edit the valley</h2>

@@ -7,7 +7,7 @@
 	<head>
 	</head>
 	<body>
-		<section layout:fragment="contents" th:object="${river}">
+		<section class="main" layout:fragment="contents" th:object="${river}">
 			<section>
 				<h2 th:if="*{isNew}">Create a river</h2>
 				<h2 th:unless="*{isNew}">Edit the river</h2>
