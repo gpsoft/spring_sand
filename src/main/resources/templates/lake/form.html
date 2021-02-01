@@ -32,11 +32,11 @@
 							<div class="col head-col">location</div>
 							<div class="col">
 								<label><input type="radio" name="bySelect" th:value="${lakeForm.locationByText()}"
-									onchange="jsChangeLocationInput(this)"
+									onchange="jsChangedLocationInput(this)"
 									th:field="*{bySelect}" />場所を指定</label>
 								<label><input type="radio" name="bySelect" th:value="${lakeForm.locationBySelect()}"
 									data-pref-flg
-									onchange="jsChangeLocationInput(this)"
+									onchange="jsChangedLocationInput(this)"
 									th:field="*{bySelect}" />都道府県から選択</label>
 								<div>
 									<input id="jsLocationByText" type="text" name="location"

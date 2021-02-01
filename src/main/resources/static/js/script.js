@@ -3,7 +3,7 @@ function jsConfirmAndSubmit(anchor, action) {
 	anchor.closest('form').submit();
 }
 
-function jsChangeLocationInput(radio) {
+function jsChangedLocationInput(radio) {
 	if ( radio == null ) return;
 	let isPref = radio.hasAttribute('data-pref-flg');
 	jsToggleInput(document.querySelector('#jsLocationByText'), !isPref);
@@ -15,15 +15,19 @@ function jsToggleInput(inp, on) {
 	inp.disabled = !on;
 }
 
-function jsWatchValleySorter(sel) {
+function jsWatchValleySorter() {
+	let sel = document.querySelector('select[name=valley-sorter]');
 	if ( sel == null ) return;
+
 	sel.addEventListener('change', ev=>{
 		location.href = ev.currentTarget.value;
 	});
 }
 
-function jsWatchLoginIdEdit(inp) {
+function jsWatchLoginIdEdit() {
+	let inp = document.querySelector('input[name=loginId]');
 	if ( inp == null ) return;
+
 	inp.addEventListener('keyup', ev=>{
 		document.querySelector('.jsLoginIdAvailable').classList.add('hidden');
 		document.querySelector('.jsLoginIdUsed').classList.add('hidden');
@@ -43,9 +47,12 @@ function jsWatchLoginIdEdit(inp) {
 }
 
 (()=>{
-	jsChangeLocationInput(document.querySelector('input[name="bySelect"]:checked'));
+	// for lake edit
+	jsChangedLocationInput(document.querySelector('input[name="bySelect"]:checked'));
 
-	jsWatchValleySorter(document.querySelector('select[name=valley-sorter]'));
+	// for valley index
+	jsWatchValleySorter();
 
-	jsWatchLoginIdEdit(document.querySelector('input[name=loginId]'));
+	// for user edit
+	jsWatchLoginIdEdit();
 })();
