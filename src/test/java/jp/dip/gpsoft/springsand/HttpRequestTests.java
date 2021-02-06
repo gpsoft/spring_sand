@@ -39,7 +39,7 @@ public class HttpRequestTests {
 		Document doc = Jsoup.parse(get("/"));
 
 		assertThat(doc.select(".user-info").text()).as("ログインボタン").isEqualTo("Login");
-		assertThat(doc.select("h3").text()).as("見出し").isEqualTo("Menu");
+		assertThat(doc.select("h1").text()).as("見出し").isEqualTo("Menu");
 		assertThat(doc.select("ul.menu li").size()).as("メニューアイテム数").isEqualTo(4);
 		assertThat(doc.select("ul.menu").text()).as("メニュー")
 				.contains("CRUD of Rivers")
