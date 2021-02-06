@@ -5,21 +5,28 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 				layout:decorate="~{partial/layout}">
 	<head>
+		<!--/*-->
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+		<!--*/-->
 	</head>
 	<body>
-		<section class="main" layout:fragment="contents">
-			<p th:if="${param.logout}">ログアウトしました。</p>
-			<h3>Menu</h3>
-			<ul class="menu">
-				<li><a href="#" th:href="@{/rivers}">CRUD of Rivers</a></li>
-				<li><a href="#" th:href="@{/lakes}">CRUD of Lakes</a></li>
-				<li sec:authorize="isAnonymous() or hasRole('ROLE_ADMIN')">
-					<a href="#" th:href="@{/valleys}">CRUD of Valleys</a>
-				</li>
-				<li sec:authorize="isAnonymous() or hasRole('ROLE_ADMIN')">
-					<a href="#" th:href="@{/users}">CRUD of Users</a>
-				</li>
-			</ul>
-		</section>
+		<div class="main-content" layout:fragment="contents">
+			<section class="flash-section" th:if="${param.logout}">
+				<p>ログアウトしました。</p>
+			</section>
+			<section class="main-section">
+				<h1>Menu</h1>
+				<ul class="menu">
+					<li><a href="#" th:href="@{/rivers}">CRUD of Rivers</a></li>
+					<li><a href="#" th:href="@{/lakes}">CRUD of Lakes</a></li>
+					<li sec:authorize="isAnonymous() or hasRole('ROLE_ADMIN')">
+						<a href="#" th:href="@{/valleys}">CRUD of Valleys</a>
+					</li>
+					<li sec:authorize="isAnonymous() or hasRole('ROLE_ADMIN')">
+						<a href="#" th:href="@{/users}">CRUD of Users</a>
+					</li>
+				</ul>
+			</section>
+		</div>
 	</body>
 </html>

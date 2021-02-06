@@ -5,16 +5,15 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 				layout:decorate="~{partial/layout}">
 	<head>
+		<!--/*-->
+		<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+		<!--*/-->
 	</head>
 	<body>
-		<section class="main" layout:fragment="contents">
+		<div class="main-content" layout:fragment="contents">
+			<div layout:replace="~{partial/backnav::backnav('users')}"></div>
 			<section>
-				<h2>Details of the user</h2>
-			</section>
-			<section style="text-align:right">
-				<a href="#" th:href="@{/users}">Back to the list</a>
-			</section>
-			<section>
+				<h1>Details of the user</h1>
 				<div class="rows" th:object="${user}">
 					<div class="row-sbs">
 						<div class="col head-col">loinId</div>
@@ -38,6 +37,6 @@
 					<a class="ope" href="javascript:void(0);" onclick="jsConfirmAndSubmit(this, '削除')">Del</a>
 				</form>
 			</section>
-		</section>
+		</div>
 	</body>
 </html>

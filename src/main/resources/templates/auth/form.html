@@ -5,16 +5,17 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 				layout:decorate="~{partial/layout}">
 	<head>
+		<!--/*-->
+		<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+		<!--*/-->
 	</head>
 	<body>
-		<section class="main" layout:fragment="contents" th:object="${authForm}">
-			<section>
-				<h2>Login</h2>
+		<div class="main-content" layout:fragment="contents" th:object="${authForm}">
+			<section class="flash-section error" th:if="${error}">
+				<p th:text="${error}">ログイン失敗</p>
 			</section>
-			<section>
-				<p class="danger" th:if="${error}" th:text="${error}">ログイン失敗</p>
-			</section>
-			<section>
+			<section class="main-section">
+				<h1>Login</h1>
 				<form th:action="@{/login}" th:method="post">
 					<div class="rows">
 						<div class="row-sbs">
@@ -51,6 +52,6 @@
 					</div>
 				</form>
 			</section>
-		</section>
+		</div>
 	</body>
 </html>

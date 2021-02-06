@@ -5,41 +5,44 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 				layout:decorate="~{partial/layout}">
 	<head>
+		<!--/*-->
+		<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+		<!--*/-->
 	</head>
 	<body>
-		<section class="main" layout:fragment="contents">
+		<div class="main-content" layout:fragment="contents">
 			<section>
-				<h2>List of rivers</h2>
-			</section>
-			<section th:if="${rivers.size} <= 0">
-				<p>Sorry, we have no rivers for now.</p>
-			</section>
-			<section th:if="${rivers.size} > 0">
-				<div class="rows">
-					<div class="row-4 head-row">
-						<div class="col">name</div>
-						<div class="col">from</div>
-						<div class="col">to</div>
-						<div class="col">operation</div>
-					</div>
-					<div class="row-4" th:each="river: ${rivers}" th:object="${river}">
-						<div class="col">
-							<a href="#" th:href="@{/rivers/{id}(id=*{id})}" th:text="*{name}">river1</a>
+				<h1>List of rivers</h1>
+				<div th:if="${rivers.size} <= 0">
+					<p>Sorry, we have no rivers for now.</p>
+				</div>
+				<div th:if="${rivers.size} > 0">
+					<div class="rows">
+						<div class="row-4 head-row">
+							<div class="col">name</div>
+							<div class="col">from</div>
+							<div class="col">to</div>
+							<div class="col">operation</div>
 						</div>
-						<div class="col" th:text="*{source}">from1</div>
-						<div class="col" th:text="*{mouse}">to1</div>
-						<div class="col">
-							<a class="ope" href="#" th:href="@{/rivers/{id}/edit(id=*{id})}">Edit</a>
-							<form class="ope-form" th:action="@{/rivers/{id}/delete(id=*{id})}" method="post">
-								<a class="ope" href="javascript:void(0);" onclick="jsConfirmAndSubmit(this, '削除')">Del</a>
-							</form>
+						<div class="row-4" th:each="river: ${rivers}" th:object="${river}">
+							<div class="col">
+								<a href="#" th:href="@{/rivers/{id}(id=*{id})}" th:text="*{name}">river1</a>
+							</div>
+							<div class="col" th:text="*{source}">from1</div>
+							<div class="col" th:text="*{mouse}">to1</div>
+							<div class="col">
+								<a class="ope" href="#" th:href="@{/rivers/{id}/edit(id=*{id})}">Edit</a>
+								<form class="ope-form" th:action="@{/rivers/{id}/delete(id=*{id})}" method="post">
+									<a class="ope" href="javascript:void(0);" onclick="jsConfirmAndSubmit(this, '削除')">Del</a>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
-			<section>
+			<div>
 				<a class="ope" href="#" th:href="@{/rivers/new}">Add New River</a>
-			</section>
-		</section>
+			</div>
+		</div>
 	</body>
 </html>

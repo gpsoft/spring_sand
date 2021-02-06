@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<!--/*-->
+		<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+		<!--*/-->
+	</head>
+	<body>
+		<div class="container">
+			<div class="main-content">
+				<nav class="back-nav" layout:fragment="backnav(entities)">
+					<a href="#" th:href="@{/{es}(es=${entities})}">Back to the list</a>
+				</nav>
+			</div>
+		</div>
+	</body>
+</html>
+
+

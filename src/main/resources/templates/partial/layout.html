@@ -7,30 +7,41 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+		<!--/*-->
+		<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+		<!--*/-->
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 		<title>Spring Sand</title>
 	</head>
 	<body>
-		<section class="container">
-			<section class="header">
-				<div><a class="brand" th:href="@{/}">Spring Sand</a></div>
-				<div class="user-info">
-					<div sec:authorize="isAnonymous()" th:unless="${noLoginBtn}">
-						<a class="ope" href="#" th:href="@{/login}">Login</a>
-					</div> 
-					<div sec:authorize="isAuthenticated()">
-						<img class="avatar" th:src="${#authentication.principal.avatar} != '' ? ${#authentication.principal.avatar} : @{/img/default_avatar.jpg}" />
-						<span th:text="${#authentication.principal.username}">user</span>
-						<div class="logout">
-							<form th:action="@{/logout}" method="post">
-								<input type="submit" value="Logout" />
-							</form>
+		<header>
+			<div class="container">
+				<div class="header-content">
+					<div class="brand">
+						<a href="#" th:href="@{/}">Spring Sand</a>
+					</div>
+					<div class="user-info">
+						<div sec:authorize="isAnonymous()" th:unless="${noLoginBtn}">
+							<a class="ope" href="#" th:href="@{/login}">Login</a>
+						</div> 
+						<div sec:authorize="isAuthenticated()">
+							<img class="avatar" th:src="${#authentication.principal.avatar} != '' ? ${#authentication.principal.avatar} : @{/img/default_avatar.jpg}" />
+							<span th:text="${#authentication.principal.username}">user</span>
+							<div class="logout">
+								<form th:action="@{/logout}" method="post">
+									<input type="submit" value="Logout" />
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
-			</section>
-			<div layout:fragment="contents"></div>
-		</section>
+			</div>
+		</header>
+		<main>
+			<div class="container">
+				<div layout:fragment="contents"></div>
+			</div>
+		</main>
 		<script type="text/javascript" th:src="@{/js/script.js}"></script>
 	</body>
 </html>

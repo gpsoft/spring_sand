@@ -5,17 +5,16 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 				layout:decorate="~{partial/layout}">
 	<head>
+		<!--/*-->
+		<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+		<!--*/-->
 	</head>
 	<body>
-		<section class="main" layout:fragment="contents" th:object="${userForm}">
+		<div class="main-content" layout:fragment="contents" th:object="${userForm}">
+			<div layout:replace="~{partial/backnav::backnav('users')}"></div>
 			<section>
-				<h2 th:if="*{isNew}">Create a user</h2>
-				<h2 th:unless="*{isNew}">Edit the user</h2>
-			</section>
-			<section style="text-align:right">
-				<a href="#" th:href="@{/users}">Back to the list</a>
-			</section>
-			<section>
+				<h1 th:if="*{isNew}">Create a user</h1>
+				<h1 th:unless="*{isNew}">Edit the user</h1>
 				<form th:action="*{isNew} ? @{/users} : @{/users/{id}(id=*{id})}" th:method="post" enctype="multipart/form-data">
 					<input th:unless="*{isNew}" type="hidden" name="id" th:value="*{id}" />
 					<div class="rows">
@@ -75,6 +74,6 @@
 					</div>
 				</form>
 			</section>
-		</section>
+		</div>
 	</body>
 </html>

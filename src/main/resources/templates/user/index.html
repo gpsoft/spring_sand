@@ -5,37 +5,40 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 				layout:decorate="~{partial/layout}">
 	<head>
+		<!--/*-->
+		<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+		<!--*/-->
 	</head>
 	<body>
-		<section class="main" layout:fragment="contents">
+		<div class="main-content" layout:fragment="contents">
 			<section>
-				<h2>List of users</h2>
-			</section>
-			<section th:if="${users.size} <= 0">
-				<p>Sorry, we have no users for now.</p>
-			</section>
-			<section th:if="${users.size} > 0">
-				<div class="rows">
-					<div class="row-4 head-row">
-						<div class="col">loginId</div>
-						<div class="col">operation</div>
-					</div>
-					<div class="row-4" th:each="user: ${users}" th:object="${user}">
-						<div class="col">
-							<a href="#" th:href="@{/users/{id}(id=*{id})}" th:text="${user.loginId}">user1</a>
+				<h1>List of users</h1>
+				<div th:if="${users.size} <= 0">
+					<p>Sorry, we have no users for now.</p>
+				</div>
+				<div th:if="${users.size} > 0">
+					<div class="rows">
+						<div class="row-4 head-row">
+							<div class="col">loginId</div>
+							<div class="col">operation</div>
 						</div>
-						<div class="col">
-							<a class="ope" href="#" th:href="@{/users/{id}/edit(id=*{id})}">Edit</a>
-							<form class="ope-form" th:action="@{/users/{id}/delete(id=*{id})}" th:method="post">
-								<a class="ope" href="javascript:void(0);" onclick="jsConfirmAndSubmit(this, '削除')">Del</a>
-							</form>
+						<div class="row-4" th:each="user: ${users}" th:object="${user}">
+							<div class="col">
+								<a href="#" th:href="@{/users/{id}(id=*{id})}" th:text="${user.loginId}">user1</a>
+							</div>
+							<div class="col">
+								<a class="ope" href="#" th:href="@{/users/{id}/edit(id=*{id})}">Edit</a>
+								<form class="ope-form" th:action="@{/users/{id}/delete(id=*{id})}" th:method="post">
+									<a class="ope" href="javascript:void(0);" onclick="jsConfirmAndSubmit(this, '削除')">Del</a>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
-			<section>
+			<div>
 				<a class="ope" href="#" th:href="@{/users/new}">Add New User</a>
-			</section>
-		</section>
+			</div>
+		</div>
 	</body>
 </html>

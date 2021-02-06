@@ -5,76 +5,78 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 				layout:decorate="~{partial/layout}">
 	<head>
+		<!--/*-->
+		<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+		<!--*/-->
 	</head>
 	<body>
-		<section class="main" layout:fragment="contents">
+		<div class="main-content" layout:fragment="contents">
 			<section>
-				<h2>List of valleys</h2>
+				<h1>List of valleys</h1>
+				<div class="search-form">
+					<form th:action="@{''}" method="get">
+						<input class="mr-4" type="text" name="q" th:value="${q}"/><input class="ope" type="submit" value="Search" />
+					</form>
+				</div>
+				<div th:object="${valleys}">
+					<div class="sorter-wrap">
+						<span>並べ替え: </span>
+						<select class="sorter" name="valley-sorter">
+							<option th:selected="${sortKeys}=='name: ASC'" th:value="@{${pathWithPage}(sort=name)}">Name昇順</option>
+							<option th:selected="${sortKeys}=='name: DESC'" th:value="@{${pathWithPage}(sort='name,desc')}">Name降順</option>
+							<option th:selected="${sortKeys}=='id: ASC,name: DESC'" th:value="@{${pathWithPage}(sort=id,sort='name,desc')}">Id昇順&amp;Name降順</option>
+						</select>
+					</div>
+				</div>
+				<div th:if="${valleys.content.size} <= 0">
+					<p>No valleys matched.</p>
+				</div>
+				<div th:if="${valleys.content.size} > 0">
+					<div class="rows">
+						<div class="row-4 head-row">
+							<div class="col">id</div>
+							<div class="col">name</div>
+							<div class="col">operation</div>
+						</div>
+						<div class="row-4" th:each="valley: ${valleys}" th:object="${valley}">
+							<div class="col">
+								<span th:text="*{id}">1</span>
+							</div>
+							<div class="col">
+								<a href="#" th:href="@{/valleys/{id}(id=*{id})}" th:text="*{name}">valley1</a>
+							</div>
+							<div class="col">
+								<a class="ope" href="#" th:href="@{/valleys/{id}/edit(id=*{id})}">Edit</a>
+								<form class="ope-form" th:action="@{/valleys/{id}/delete(id=*{id})}" method="post">
+									<a class="ope" href="javascript:void(0);" onclick="jsConfirmAndSubmit(this, '削除')">Del</a>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div th:if="${valleys.content.size} > 0" th:object="${valleys}">
+					<div class="pager">
+						<a th:href="@{${pathWithSort}(page=0)}">最初</a>
+						<th:block th:each="i : ${#numbers.sequence(0, valleys.totalPages - 1)}">
+							<a th:href="@{${pathWithSort}(page=${i})}"
+								th:text="${i+1}"
+								th:class="*{number}==${i}?'active':''">0</a>
+						</th:block>
+						<a th:href="@{${pathWithSort}(page=*{totalPages-1})}">最後</a>
+					</div>
+				</div>
 			</section>
-			<section>
-				<form th:action="@{''}" method="get">
-					<input class="mr-4" type="text" name="q" th:value="${q}"/><input class="ope" type="submit" value="Search" />
-				</form>
-			</section>
-			<section th:object="${valleys}">
-				<h3>ページング情報(デバッグ用)</h3>
+			<div>
+				<a class="ope" href="#" th:href="@{/valleys/new}">Add New Valley</a>
+			</div>
+			<aside th:object="${valleys}">
 				<p><span>総アイテム数: </span><span th:text="*{totalElements}">1</span></p>
 				<p><span>1ページあたりのアイテム数: </span><span th:text="*{size}">1</span></p>
 				<p><span>総ページ数: </span><span th:text="*{totalPages}">1</span></p>
 				<p><span>いま表示中のページ番号(0オリジン): </span><span th:text="*{number}">1</span></p>
 				<p><span>いま表示中のアイテム数: </span><span th:text="*{numberOfElements}">1</span></p>
 				<p><span>ソートキー: </span><span th:text="*{sort}">1</span></p>
-			</section>
-			<section th:object="${valleys}">
-				<div class="sorter-wrap">
-					<span>並べ替え: </span>
-					<select class="sorter" name="valley-sorter">
-						<option th:selected="${sortKeys}=='name: ASC'" th:value="@{${pathWithPage}(sort=name)}">Name昇順</option>
-						<option th:selected="${sortKeys}=='name: DESC'" th:value="@{${pathWithPage}(sort='name,desc')}">Name降順</option>
-						<option th:selected="${sortKeys}=='id: ASC,name: DESC'" th:value="@{${pathWithPage}(sort=id,sort='name,desc')}">Id昇順&amp;Name降順</option>
-					</select>
-				</div>
-			</section>
-			<section th:if="${valleys.content.size} <= 0">
-				<p>No valleys matched.</p>
-			</section>
-			<section th:if="${valleys.content.size} > 0">
-				<div class="rows">
-					<div class="row-4 head-row">
-						<div class="col">id</div>
-						<div class="col">name</div>
-						<div class="col">operation</div>
-					</div>
-					<div class="row-4" th:each="valley: ${valleys}" th:object="${valley}">
-						<div class="col">
-							<span th:text="*{id}">1</span>
-						</div>
-						<div class="col">
-							<a href="#" th:href="@{/valleys/{id}(id=*{id})}" th:text="*{name}">valley1</a>
-						</div>
-						<div class="col">
-							<a class="ope" href="#" th:href="@{/valleys/{id}/edit(id=*{id})}">Edit</a>
-							<form class="ope-form" th:action="@{/valleys/{id}/delete(id=*{id})}" method="post">
-								<a class="ope" href="javascript:void(0);" onclick="jsConfirmAndSubmit(this, '削除')">Del</a>
-							</form>
-						</div>
-					</div>
-				</div>
-			</section>
-			<section th:if="${valleys.content.size} > 0" th:object="${valleys}">
-				<div class="pager">
-					<a th:href="@{${pathWithSort}(page=0)}">最初</a>
-					<th:block th:each="i : ${#numbers.sequence(0, valleys.totalPages - 1)}">
-						<a th:href="@{${pathWithSort}(page=${i})}"
-							th:text="${i+1}"
-							th:class="*{number}==${i}?'active':''">0</a>
-					</th:block>
-					<a th:href="@{${pathWithSort}(page=*{totalPages-1})}">最後</a>
-				</div>
-			</section>
-			<section>
-				<a class="ope" href="#" th:href="@{/valleys/new}">Add New Valley</a>
-			</section>
-		</section>
+			</aside>
+		</div>
 	</body>
 </html>

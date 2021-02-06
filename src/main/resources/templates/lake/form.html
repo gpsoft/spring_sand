@@ -5,17 +5,16 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 				layout:decorate="~{partial/layout}">
 	<head>
+		<!--/*-->
+		<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+		<!--*/-->
 	</head>
 	<body>
-		<section class="main" layout:fragment="contents" th:object="${lakeForm}">
+		<div class="main-content" layout:fragment="contents" th:object="${lakeForm}">
+			<div layout:replace="~{partial/backnav::backnav('lakes')}"></div>
 			<section>
-				<h2 th:if="*{isNew}">Create a lake</h2>
-				<h2 th:unless="*{isNew}">Edit the lake</h2>
-			</section>
-			<section style="text-align:right">
-				<a href="#" th:href="@{/lakes}">Back to the list</a>
-			</section>
-			<section>
+				<h1 th:if="*{isNew}">Create a lake</h1>
+				<h1 th:unless="*{isNew}">Edit the lake</h1>
 				<form th:action="*{isNew} ? @{/lakes} : @{/lakes/{id}(id=*{id})}" th:method="post">
 					<input th:unless="*{isNew}" type="hidden" name="id" th:value="*{id}" />
 					<div class="rows">
@@ -72,6 +71,6 @@
 					</div>
 				</form>
 			</section>
-		</section>
+		</div>
 	</body>
 </html>
