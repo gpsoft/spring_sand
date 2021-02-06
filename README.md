@@ -20,6 +20,7 @@ Springフレームワークの実験プロジェクト。
 - `Auth` ...AuthenticationとAuthorization
 - `CRUD of Users` ...ファイルアップロード、Many-to-many関連など
 - `Layout` ...全ページに共通レイアウトを適用
+- `Test` ...テストの自動化
 
 ## Rivers
 
@@ -102,3 +103,15 @@ Riversとの大きな違いは2つ。
 - チェックボックスで、ロールを複数選択
 - バリデーションチェックのグループ分け(新規登録のときだけ特定のバリデーションチェックを行う、とか)
 - ロールはマスターテーブルで管理し、ユーザテーブルとMany-to-manyで関連付けることにした
+
+## Test
+
+- `SpringSandApplicationTests` ...基本。全レイヤを結合
+- `HttpRequestTests` ...httpリクエスト・レスポンスレベルのテスト
+- `HttpRequestEmulatedTest` ...httpサーバ無し。エミュレートされたリクエストでテスト
+- `WebLayerTests` ...Webレイヤのみをテスト
+
+実行方法は…。
+
+- Eclipseの`Package Explorer`でプロジェクトを右クリックして`Run As`(または`Debug As`)→`JUnit Test`
+- あるいは、特定のテストクラスを右クリック
