@@ -21,6 +21,7 @@ Springフレームワークの実験プロジェクト。
 - `CRUD of Users` ...ファイルアップロード、Many-to-many関連など
 - `Layout` ...全ページに共通レイアウトを適用
 - `Test` ...テストの自動化
+- `Build(Packaging)` ...パッケージング
 
 ## Rivers
 
@@ -115,3 +116,46 @@ Riversとの大きな違いは2つ。
 
 - Eclipseの`Package Explorer`でプロジェクトを右クリックして`Run As`(または`Debug As`)→`JUnit Test`
 - あるいは、特定のテストクラスを右クリック
+
+## Packaging
+
+### ビルド
+
+```sh
+$ ./mvnw package spring-boot:repackage
+```
+
+### 起動
+
+```sh
+$ java -jar target/spring_sand-0.0.1-SNAPSHOT.jar
+```
+
+いつも通り、8080番ポートで起動する。Eclipseのコンソールに出ていたログは、ターミナルに出力される。
+
+### 本番
+
+- 80番ポートで起動
+- ログは、ログファイルへ出力
+- DBは、H2ではなく、MySQLを使う
+
+以上をプロパティファイルで切り替える。
+
+- `application.properties` ...共通
+- `application-dev.properties` ...開発時用
+- `application-prod.properties`
+
+ログファイル用のディレクトリを作成。
+
+```sh
+$ mkdir -p /var/tmp/spring_sand/log
+$ chmod -R 777 /var/tmp/spring_sand
+```
+
+起動時に、アクティブプロファイルを指定。
+
+```sh
+$ sudo java -jar target/spring_sand-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+```
+
+80番ポートを使うので、`sudo`が必要(Windowsでは不要?)。
