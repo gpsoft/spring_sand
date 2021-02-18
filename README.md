@@ -133,19 +133,22 @@ $ java -jar target/spring_sand-0.0.1-SNAPSHOT.jar
 
 いつも通り、8080番ポートで起動する。Eclipseのコンソールに出ていたログは、ターミナルに出力される。
 
-### 本番
+### 本番環境
+
+開発時とは、以下の点が異なる。
 
 - 80番ポートで起動
-- ログは、ログファイルへ出力
+- ログは、少なめ
+- ログは、ログファイル(`/var/tmp/spring_sand/log/spring.log`)へ出力
 - DBは、H2ではなく、MySQLを使う
 
 以上をプロパティファイルで切り替える。
 
 - `application.properties` ...共通
 - `application-dev.properties` ...開発時用
-- `application-prod.properties`
+- `application-prod.properties` ...本番環境用
 
-ログファイル用のディレクトリを作成。
+ログファイル用のディレクトリを作成(Linux用)。
 
 ```sh
 $ mkdir -p /var/tmp/spring_sand/log
@@ -158,4 +161,10 @@ $ chmod -R 777 /var/tmp/spring_sand
 $ sudo java -jar target/spring_sand-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
 ```
 
-80番ポートを使うので、`sudo`が必要(Windowsでは不要?)。
+Linuxで80番ポートを使う場合は、`sudo`が必要(Windowsでは不要?)。
+
+本番DBのパスワードをファイルに書くのは避けたい、という場合は、コマンドラインで指定しても良い。
+
+```sh
+$ sudo java -jar target/spring_sand-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod --spring.datasource.password=StrongPassword123
+```
