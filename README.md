@@ -4,6 +4,8 @@
 
 Springフレームワークの実験プロジェクト。
 
+[プレゼンスライド](https://gpsoft.github.io/slidarch/spring_sand.html)もあるよ。
+
 ## 使い方
 
 1. Eclispeのワークスペースフォルダの下で`git clone`
