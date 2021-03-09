@@ -54,6 +54,15 @@ public class SpringSandApplication {
 		return args -> {
 			System.out.println("SpringSand application started!");
 
+			if (userRepository.count() <= 0) {	// DB is empty?
+				System.out.println("Populating DB with minimal data.");
+				roleRepository.save(new Role(Role.ROLE_USER, "一般ユーザ"));
+				roleRepository.save(new Role(Role.ROLE_ADMIN, "管理者"));
+				userRepository.save(
+						new User("admin", pwEncoder.encode("admin"), Role.ROLE_ADMIN));
+				userRepository.save(
+						new User("user", pwEncoder.encode("user"), Role.ROLE_USER));
+			}
 			if (Arrays.asList(env.getActiveProfiles()).contains("dev")) {
 				// サンプルデータをINSERTしておく。
 				River shinano = new River("信濃川", "長野", "新潟");
@@ -75,13 +84,6 @@ public class SpringSandApplication {
 				valleyRepository.save(new Valley("帝釈峡"));
 				valleyRepository.save(new Valley("仙酔峡"));
 				valleyRepository.save(new Valley("Yosemite & Kalalau"));
-
-				roleRepository.save(new Role(Role.ROLE_USER, "一般ユーザ"));
-				roleRepository.save(new Role(Role.ROLE_ADMIN, "管理者"));
-				userRepository
-						.save(new User("user", pwEncoder.encode("user"), Role.ROLE_USER));
-				userRepository.save(
-						new User("admin", pwEncoder.encode("admin"), Role.ROLE_ADMIN));
 			}
 		};
 	}
