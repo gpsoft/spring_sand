@@ -4,11 +4,11 @@ DBVOLUME ?= mysql57
 DBPASSWD ?= mysql
 DBPORTNO ?= 3306
 
-HTTPDPORTNO ?= 8080
+PORT ?= 8080
 
 DBHOST = $(shell docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(DBCONTAINER))
 
-CMD_LIST := startdb attachdb stopdb jar prod
+CMD_LIST := startdb attachdb stopdb jar prod deploy
 
 all:
 	@echo Usage:
@@ -17,6 +17,7 @@ all:
 	@echo make stopdb
 	@echo make jar
 	@echo make prod
+	@echo make deploy
 
 .PHONY: $(CMD_LIST)
 .SILENT: $(CMD_LIST)
@@ -49,7 +50,16 @@ jar:
 
 # Run app with production profile
 prod:
-	java -jar target/spring_sand-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod --spring.datasource.url=jdbc:mysql://$(DBHOST):$(DBPORTNO)/spring_sand --server.port=$(HTTPDPORTNO)
+	PORT=$(PORT) java -jar target/spring_sand-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod,mysql --spring.datasource.url=jdbc:mysql://$(DBHOST):$(DBPORTNO)/spring_sand --spring.datasource.username=root --spring.datasource.password=mysql
+
+# Deploy app on Heroku
+deploy:
+	heroku deploy:jar target/spring_sand-0.0.1-SNAPSHOT.jar --app spring-sand
+	echo Opening a browser...
+	heroku open --app spring-sand
+	echo You can also run below commands:
+	echo heroku run bash --app spring-sand
+	echo heroku logs --tail --app spring-sand
 
 %:
 	@:

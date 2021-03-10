@@ -4,7 +4,8 @@
 
 Springフレームワークの実験プロジェクト。
 
-[プレゼンスライド](https://gpsoft.github.io/slidarch/spring_sand.html)もあるよ。
+- [プレゼンスライド](https://gpsoft.github.io/slidarch/spring_sand.html)
+- [Liveデモ(Herokuなので起きるのに1分弱かかるよ)](https://spring-sand.herokuapp.com/)
 
 ## 使い方
 
@@ -23,7 +24,7 @@ Springフレームワークの実験プロジェクト。
 - `CRUD of Users` ...ファイルアップロード、Many-to-many関連など
 - `Layout` ...全ページに共通レイアウトを適用
 - `Test` ...テストの自動化
-- `Build(Packaging)` ...パッケージング
+- `Build(Packaging)` ...パッケージングとデプロイ(Heroku)
 
 ## Rivers
 
@@ -121,93 +122,6 @@ Riversとの大きな違いは2つ。
 
 ## Packaging
 
-### ビルド
+`jar`ファイルをビルドして、ローカルに実行したり、Herokuへデプロイする。
 
-```sh
-$ ./mvnw package spring-boot:repackage
-```
-
-### 起動
-
-```sh
-$ java -jar target/spring_sand-0.0.1-SNAPSHOT.jar
-```
-
-いつも通り、8080番ポートで起動する。Eclipseのコンソールに出ていたログは、ターミナルに出力される。
-
-### 本番環境
-
-開発時とは、以下の点が異なる。
-
-- 80番ポートで起動
-- ログは、少なめ
-- ログは、ログファイル(`/var/tmp/spring_sand/log/spring.log`)へ出力
-- DBは、H2ではなく、MySQLを使う
-
-以上をプロパティファイルで切り替える。
-
-- `application.properties` ...共通
-- `application-dev.properties` ...開発時用
-- `application-prod.properties` ...本番環境用
-
-ログファイル用のディレクトリを作成(Linux用)。
-
-```sh
-$ sudo mkdir -p /var/tmp/spring_sand/log
-$ sudo chmod -R 777 /var/tmp/spring_sand
-```
-
-起動時に、アクティブプロファイルを指定。
-
-```sh
-$ sudo java -jar target/spring_sand-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
-```
-
-Linuxで80番ポートを使う場合は、`sudo`が必要(Windowsでは不要?)。
-
-本番DBのパスワードをファイルに書くのは避けたい、という場合は、コマンドラインで指定しても良い。
-
-```sh
-$ sudo java -jar target/spring_sand-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod --spring.datasource.password=StrongPassword123
-```
-
-### DDL
-
-```sql
-CREATE TABLE `rivers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `source` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `mouse` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-CREATE TABLE `lakes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `area` int(11) NOT NULL,
-  `location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-CREATE TABLE `valleys` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-CREATE TABLE `roles` (
-  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `login_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `avatar` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-CREATE TABLE `user_role` (
-  `user_id` int(11) NOT NULL,
-  `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`user_id`, `role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-```
+[詳しくは、こちら](docs/packaging.md)

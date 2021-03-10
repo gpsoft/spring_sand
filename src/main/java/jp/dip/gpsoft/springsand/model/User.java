@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -21,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class User {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String loginId;
@@ -33,9 +32,7 @@ public class User {
 			inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 
-	// FIX: CLOBって、H2専用かなぁ?
-	@Lob
-	@Column(columnDefinition = "CLOB NOT NULL DEFAULT ''")
+	@Column(length = 100000)
 	private String avatar;
 
 	public User() {
