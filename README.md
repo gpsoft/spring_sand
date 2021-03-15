@@ -9,7 +9,7 @@ Springフレームワークの実験プロジェクト。
 
 ## 使い方
 
-1. Eclispeのワークスペースフォルダの下で`git clone`
+1. Eclipseのワークスペースフォルダの下で`git clone`
 2. Eclipseのメニューから`File`→`Import`→`Existing Maven Projects`
 3. Eclipseの`Package Explorer`でプロジェクトを右クリックして`Maven`→`Update project`
 4. Eclipseの`Package Explorer`でプロジェクトを右クリックして`Run As`(または`Debug As`)→`Spring Boot App`
