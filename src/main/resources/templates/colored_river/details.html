@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				layout:decorate="~{partial/layout}">
+	<head>
+		<!--/*-->
+		<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+		<!--*/-->
+	</head>
+	<body>
+		<div class="main-content" layout:fragment="contents">
+			<div layout:replace="~{partial/backnav::backnav('colored_rivers')}"></div>
+			<section>
+				<h1>Details of the river(<span class="success">colored</span>)</h1>
+				<div class="rows" th:object="${river}">
+					<div class="row-sbs">
+						<div class="col head-col">Name</div>
+						<div class="col" th:text="*{name}">river</div>
+					</div>
+					<div class="row-sbs">
+						<div class="col head-col">Source</div>
+						<div class="col" th:text="*{source}">from</div>
+					</div>
+					<div class="row-sbs">
+						<div class="col head-col">Mouse</div>
+						<div class="col" th:text="*{mouse}">to</div>
+					</div>
+					<div class="row-sbs">
+						<div class="col head-col">Color</div>
+						<div class="col" th:if="*{color}" th:text="*{color.name}"></div>
+					</div>
+				</div>
+			</section>
+			<section>
+				<a class="ope" href="#" th:href="@{/colored_rivers/{id}/edit(id=*{id})}">Edit</a>
+				<form class="ope-form" th:action="@{/colored_rivers/{id}/delete(id=*{id})}" method="post">
+					<a class="ope" href="javascript:void(0);" onclick="jsConfirmAndSubmit(this, '削除')">Del</a>
+				</form>
+			</section>
+		</div>
+	</body>
+</html>

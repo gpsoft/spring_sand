@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				layout:decorate="~{partial/layout}">
+	<head>
+		<!--/*-->
+		<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+		<!--*/-->
+	</head>
+	<body>
+		<div class="main-content" layout:fragment="contents" th:object="${river}">
+			<div layout:replace="~{partial/backnav::backnav('colored_rivers')}"></div>
+			<section>
+				<h1 th:if="*{isNew}">Create a river(<span class="success">colored</span>)</h1>
+				<h1 th:unless="*{isNew}">Edit the river(<span class="success">colored</span>)</h1>
+				<form th:action="*{isNew} ? @{/colored_rivers} : @{/colored_rivers/{id}(id=*{id})}" method="post">
+					<input th:unless="*{isNew}" type="hidden" name="id" th:value="*{id}" />
+					<div class="rows">
+						<div class="row-sbs">
+							<div class="col head-col">Name</div>
+							<div class="col">
+								<input type="text" name="name" th:value="*{name}"
+												   placeholder="川の名前" required />
+							</div>
+						</div>
+						<div class="row-sbs">
+							<div class="col head-col">Source</div>
+							<div class="col">
+								<input type="text" name="source" th:value="*{source}"
+												   placeholder="源流" required />
+							</div>
+						</div>
+						<div class="row-sbs">
+							<div class="col head-col">Mouse</div>
+							<div class="col">
+								<input type="text" name="mouse" th:value="*{mouse}"
+												   placeholder="河口" required />
+							</div>
+						</div>
+						<div class="row-sbs">
+							<div class="col head-col">Color</div>
+							<div class="col">
+								<select th:field="*{color}">
+									<option value=""></option>
+									<option th:each="color: ${colors}"
+										th:value="${color.id}"
+										th:text="${color.name}"></option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="rows">
+						<div class="row-sbs">
+							<div class="col head-col"></div>
+							<div class="col">
+								<input class="ope" type="submit" value="Save" />
+							</div>
+						</div>
+					</div>
+				</form>
+			</section>
+		</div>
+	</body>
+</html>

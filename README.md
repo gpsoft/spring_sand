@@ -26,6 +26,10 @@ Springフレームワークの実験プロジェクト。
 - `Test` ...テストの自動化
 - `Build(Packaging)` ...パッケージングとデプロイ(Heroku)
 
+さらに…
+
+- `CRUD of Rivers(Colored)` ...RiversのCRUDに、Many-to-one関連でColorを追加
+
 ## Rivers
 
 | HTTPメソッド|URL |Controllerメソッド|テンプレート |

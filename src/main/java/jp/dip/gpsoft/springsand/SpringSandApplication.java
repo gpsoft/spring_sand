@@ -11,11 +11,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import jp.dip.gpsoft.springsand.model.Color;
 import jp.dip.gpsoft.springsand.model.Lake;
 import jp.dip.gpsoft.springsand.model.River;
 import jp.dip.gpsoft.springsand.model.Role;
 import jp.dip.gpsoft.springsand.model.User;
 import jp.dip.gpsoft.springsand.model.Valley;
+import jp.dip.gpsoft.springsand.repository.ColorRepository;
 import jp.dip.gpsoft.springsand.repository.LakeRepository;
 import jp.dip.gpsoft.springsand.repository.RiverRepository;
 import jp.dip.gpsoft.springsand.repository.RoleRepository;
@@ -43,6 +45,9 @@ public class SpringSandApplication {
 	private RoleRepository roleRepository;
 
 	@Autowired
+	private ColorRepository colorRepository;
+	
+	@Autowired
 	private PasswordEncoder pwEncoder;
 
 	public static void main(String[] args) {
@@ -62,6 +67,9 @@ public class SpringSandApplication {
 						new User("admin", pwEncoder.encode("admin"), Role.ROLE_ADMIN));
 				userRepository.save(
 						new User("user", pwEncoder.encode("user"), Role.ROLE_USER));
+				colorRepository.save(new Color("赤"));
+				colorRepository.save(new Color("緑"));
+				colorRepository.save(new Color("青"));
 			}
 			if (Arrays.asList(env.getActiveProfiles()).contains("dev")) {
 				// サンプルデータをINSERTしておく。

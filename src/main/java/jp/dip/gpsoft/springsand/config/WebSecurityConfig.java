@@ -65,6 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()		// 認可に関する設定
 				// URLパスのパターンと、認可条件のペアで指定
 				.antMatchers("/", "/rivers/**").permitAll()		// 誰でもOK
+				.antMatchers("/colored_rivers/**").permitAll()
 				.antMatchers("/login", "/error").permitAll()
 				.antMatchers("/logout").authenticated()			// 認証済みなら誰でもOK
 				.antMatchers("/lakes/**").authenticated()

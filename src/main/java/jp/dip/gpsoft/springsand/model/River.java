@@ -1,21 +1,29 @@
 package jp.dip.gpsoft.springsand.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "rivers")
 public class River {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String name;
 	private String source;
 	private String mouse;
+
+	// This field is for *Colored* river only.
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "color_id")
+	private Color color;
 
 	public River() {
 	}
@@ -24,6 +32,7 @@ public class River {
 		this.name = name;
 		this.source = source;
 		this.mouse = mouse;
+		this.color = null;
 	}
 
 	public boolean isNew() {
@@ -68,5 +77,13 @@ public class River {
 
 	public void setMouse(String mouse) {
 		this.mouse = mouse;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
 	}
 }
