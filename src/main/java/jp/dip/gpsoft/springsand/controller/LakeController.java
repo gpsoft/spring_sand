@@ -22,6 +22,22 @@ public class LakeController {
 	@Autowired
 	private LakeService lakeService;
 
+	//	@Autowired
+	//	private AutowireCapableBeanFactory factory;
+
+	@ModelAttribute("lakeForm")
+	public LakeForm emptyLakeForm() {
+		// このメソッドが返すオブジェクトは、
+		// lakeFormという名前の属性としてViewへ渡される。
+		// model.addAttribute("lakeForm", ...)に相当。
+
+		LakeForm cf = new LakeForm();
+		// FormがPOJOなら↑
+		// FormにDIしたい場合は↓
+		//LakeForm cf = factory.createBean(LakeForm.class);
+		return cf;
+	}
+
 	@GetMapping
 	public String index(Model model) {
 		model.addAttribute("lakes", lakeService.findAllLakes());
@@ -36,13 +52,12 @@ public class LakeController {
 
 	@GetMapping("/new")
 	public String newLake(Model model) {
-		model.addAttribute("lakeForm", new LakeForm());
 		return "lake/form";
 	}
 
 	@GetMapping("/{id:^[\\d]+$}/edit")
-	public String editLake(@PathVariable("id") Integer id, Model model) {
-		model.addAttribute("lakeForm", new LakeForm(lakeService.lookupLake(id)));
+	public String editLake(@PathVariable("id") Integer id, LakeForm lake, Model model) {
+		lake.populateWith(lakeService.lookupLake(id));
 		return "lake/form";
 	}
 

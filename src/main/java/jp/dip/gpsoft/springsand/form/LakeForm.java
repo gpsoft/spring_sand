@@ -39,7 +39,7 @@ public class LakeForm {
 		area = "";
 	}
 
-	public LakeForm(Lake lake) {
+	public void populateWith(Lake lake) {
 		id = lake.getId();
 		name = lake.getName();
 		location = lake.getLocation();
