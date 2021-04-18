@@ -257,6 +257,12 @@ $ heroku open --app spring-sand
 $ heroku logs --tail --app spring-sand
 ```
 
+現状、HerokuのJavaのデフォルトバージョンはJDK8のようだ。バージョンを明示したい場合は、`heroku deploy:jar`コマンドに`--jdk`オプションを付ければ良い。
+
+```sh
+$ heroku deploy:jar target/spring_sand-0.0.1-SNAPSHOT.jar --jdk 11 --app spring-sand
+```
+
 ### Herokuの注意点
 
 Herokuコンテナ側で自動定義される環境変数が大事。
