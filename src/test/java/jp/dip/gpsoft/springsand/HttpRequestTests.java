@@ -40,9 +40,10 @@ public class HttpRequestTests {
 
 		assertThat(doc.select(".user-info").text()).as("ログインボタン").isEqualTo("Login");
 		assertThat(doc.select("h1").text()).as("見出し").isEqualTo("Menu");
-		assertThat(doc.select("ul.menu li").size()).as("メニューアイテム数").isEqualTo(4);
+		assertThat(doc.select("ul.menu li").size()).as("メニューアイテム数").isEqualTo(5);
 		assertThat(doc.select("ul.menu").text()).as("メニュー")
 				.contains("CRUD of Rivers")
+				.contains("CRUD of Rivers(Colored)")
 				.contains("CRUD of Lakes")
 				.contains("CRUD of Valleys")
 				.contains("CRUD of Users");

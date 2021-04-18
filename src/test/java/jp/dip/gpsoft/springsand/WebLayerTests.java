@@ -27,6 +27,7 @@ import jp.dip.gpsoft.springsand.model.CustomUserDetails;
 import jp.dip.gpsoft.springsand.model.Role;
 import jp.dip.gpsoft.springsand.model.User;
 import jp.dip.gpsoft.springsand.model.Valley;
+import jp.dip.gpsoft.springsand.repository.ColorRepository;
 import jp.dip.gpsoft.springsand.repository.LakeRepository;
 import jp.dip.gpsoft.springsand.repository.RiverRepository;
 import jp.dip.gpsoft.springsand.repository.RoleRepository;
@@ -66,6 +67,9 @@ public class WebLayerTests {
 
 	@MockBean
 	private RoleRepository roleRepository;
+
+	@MockBean
+	private ColorRepository colorRepository;
 
 	@MockBean
 	private BCryptPasswordEncoder pwEncoder;

@@ -46,7 +46,7 @@ public class SpringSandApplication {
 
 	@Autowired
 	private ColorRepository colorRepository;
-	
+
 	@Autowired
 	private PasswordEncoder pwEncoder;
 
@@ -59,7 +59,7 @@ public class SpringSandApplication {
 		return args -> {
 			System.out.println("SpringSand application started!");
 
-			if (userRepository.count() <= 0) {	// DB is empty?
+			if (userRepository.count() <= 0) { // DB is empty?
 				System.out.println("Populating DB with minimal data.");
 				roleRepository.save(new Role(Role.ROLE_USER, "一般ユーザ"));
 				roleRepository.save(new Role(Role.ROLE_ADMIN, "管理者"));
