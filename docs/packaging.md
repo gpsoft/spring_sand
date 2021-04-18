@@ -56,6 +56,7 @@ CREATE TABLE `rivers` (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `source` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `mouse` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `color_id` int(11),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 CREATE TABLE `lakes` (
@@ -87,6 +88,11 @@ CREATE TABLE `user_role` (
   `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`user_id`, `role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+CREATE TABLE `colors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
 ### テーブルを作る(PostgreSQL)
@@ -97,6 +103,7 @@ CREATE TABLE rivers (
   name varchar(255) NOT NULL,
   source varchar(255) NOT NULL,
   mouse varchar(255) NOT NULL,
+  color_id integer,
   PRIMARY KEY (id)
 );
 CREATE TABLE lakes (
@@ -127,6 +134,11 @@ CREATE TABLE user_role (
   user_id integer NOT NULL,
   role_id varchar(255) NOT NULL,
   PRIMARY KEY (user_id, role_id)
+);
+CREATE TABLE colors (
+  id serial,
+  name varchar(255) NOT NULL,
+  PRIMARY KEY (id)
 );
 ```
 
